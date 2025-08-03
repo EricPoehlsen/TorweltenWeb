@@ -10,6 +10,6 @@ ini_set('display_errors', 1); ?>
     <div id="userbar"><?php include "_userbar.php"; ?></div>
     <p>Hallo</p>
 
-    <?php echo $_SESSION["userid"];?>
+    <?php print_r($_SESSION);?>
 </body>
 </html>

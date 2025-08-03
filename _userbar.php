@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION["userid"])) {
-    echo "<p>Logged in</p>";
+    echo "<p><a href='login.php?logout'>Logout</a></p>";
 } else {
     ?>
 <form method="POST" action="login.php">
