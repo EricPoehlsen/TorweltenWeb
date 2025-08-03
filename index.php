@@ -9,7 +9,5 @@ ini_set('display_errors', 1); ?>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>
     <p>Hallo</p>
-
-    <?php print_r($_SESSION);?>
 </body>
 </html>

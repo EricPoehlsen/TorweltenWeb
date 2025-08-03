@@ -2,6 +2,7 @@
     $login = 0;
     session_name("Torwelten");
     session_start();
+    include_once "_lang.php";
 
     // connect to database
     include "config.php";
@@ -23,7 +24,7 @@
             if ($passcheck == true) {
                 //generate token
                 $login = 1;
-                $token = hash("sha512",strval(time()).random_bytes(256).$stored_hash);
+                $token = hash("sha512",strval(time()).random_bytes(256));
                 $expire = new DateTime()->setTimestamp(time() + 3600);
                 $expires = $expire->format("Y-m-d H:i:s"); 
                 $userid = $userdata[0]["userid"];
@@ -41,7 +42,6 @@
         $token = $_COOKIE["TorweltenLogin"];
         $valid_token = preg_match("/^[0-9a-f]{128}$/", $token);
         if ($valid_token == true) {
-            echo "trying to delete token";
             $sql = "DELETE FROM logins WHERE token = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$token]);
@@ -60,28 +60,28 @@
 <?php
     switch ($login) { // Header based on Login result
         case -2:
-            echo "<h1>Logged out</h1>";
+            echo "<h1>{$M['h_logout']}</h1>";
             break;
         case -1:
-            echo "<h1>Login failed ...</h1>";
+            echo "<h1>{$M['h_login_failed']}</h1>";
             break;
         case 0:
-            echo "<h1>Please login ...</h1>";
+            echo "<h1>{$M['h_login']}</h1>";
             break;
         case 1:
-            echo "<h1>Login successful</h1>";
+            echo "<h1>{$M['h_login_success']}</h1>";
             break;
     }
     if ($login == -1 OR $login == 0) { // show the login form?
         ?>
         <form method="POST">
-            <input placeholder="username" name="user"/>
-            <input placeholder="password" name="pass" type="password"/>
-            <input value="login" type="submit"/>
+            <input placeholder="<?php echo $M["b_username"];?>" name="user"/>
+            <input placeholder="<?php echo $M["b_password"];?>" name="pass" type="password"/>
+            <input value="<?php echo $M["b_login"];?>" type="submit"/>
         </form>
         <?php
     }
 ?>
-<a href="index.php">Continue ...</a>
+<a href="index.php"><?php echo $M["l_continue"]; ?></a>
 </body>
 </html>

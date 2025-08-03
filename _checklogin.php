@@ -22,5 +22,4 @@
             echo "WARNING: INVALID COOKIE!";
         }
     }
-
 ?>
