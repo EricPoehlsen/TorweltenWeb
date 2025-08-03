@@ -1,4 +1,4 @@
-<h1>Preparing Database</h1>
+<h1><?php echo $M["h_db_init"]; ?></h1>
 <?php
     try {
         include "config.php";
@@ -6,9 +6,9 @@
         $db = new PDO($dsn, $db_user, $db_pass);
         $init = file_get_contents("init.sql");
         $qr = $db->exec($init);
-        echo "<p>Database ready ... <p>";
-        echo "<p><a href='install.php'>Continue ...</a></p>";
+        echo "<p>{$M["t_db_done"]}<p>";
+        echo "<p><a href='install.php'>{$M["l_continue"]}</a></p>";
     } catch (Exception $e) {
-        echo "<p><b>Something went wrong, check your config.php</b>";
+        echo "<p><b>{$M["t_db_fail"]}</b>";
     }
 ?>

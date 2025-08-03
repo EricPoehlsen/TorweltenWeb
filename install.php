@@ -1,4 +1,7 @@
-<?php ini_set('display_errors', 1); ?>
+<?php 
+    ini_set('display_errors', 1); 
+    include_once "_lang.php";
+?>
 <!DOCTYPE html>
 <html>
     <head>

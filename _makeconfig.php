@@ -17,25 +17,25 @@
         try {   
             $db = new PDO($dsn, $db_user, $db_pass);
             ?>
-            <p>Database connection successful ...</p>
-            <p><a href="install.php">Continue ...</p>
+            <h1><?php echo $M["t_db_success"]; ?></h1>
+            <p><a href="install.php"><?php echo $M["l_continue"]; ?></p>
             <?php
         } catch (Exception $e) {
             unlink("config.php");
             ?>
-            <p>Database connection failed ...</p>
-            <p><a href="install.php">Continue ...</p>
+            <h1><?php echo $M["t_db_failed"]; ?></h1>
+            <p><a href="install.php"><?php echo $M["l_continue"]; ?></p>
             <?php
         }
     } else {
         ?>
         <form method="POST">
-        <h1>Enter Database Credentials</h1>
-        DB_SERV: <input name="db_serv"/><br/>
-        DB_NAME: <input name="db_name"/><br/>
-        DB_USER: <input name="db_user"/><br/>
-        DB_PASS: <input name="db_pass" type="password"/><br/>
-        <input type="submit" value="Create Config"/>
+        <h1><?php echo $M['h_enter_db_creds']; ?></h1>
+        <?php echo $M['t_db_serv']; ?><input name="db_serv"/><br/>
+        <?php echo $M['t_db_name']; ?><input name="db_name"/><br/>
+        <?php echo $M['t_db_user']; ?><input name="db_user"/><br/>
+        <?php echo $M['t_db_pass']; ?><input name="db_pass" type="password"/><br/>
+        <input type="submit" value="<?php echo $M["b_create_config"]; ?>"/>
         </form>
         <?php
     }
