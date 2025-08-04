@@ -5,9 +5,11 @@
     $admin = $db->query("SELECT username FROM users WHERE access = 99");
     if ($admin->rowCount() > 0) {
         ?>
-        <h1><?php echo $M["h_install_done"]; ?></h1>
-        <p><?php echo $M["t_install_done"]; ?></p>
-        <p><a href="index.php"><?php echo $M["l_to_site"]; ?></a></p>
+        <h1>Installation abgeschlossen ...</h1>
+        <p>Es scheint, als wäre die Installation erfolgreich abgeschlossen.</p>
+        <p>Die Datenbankverbindung wurde erfolgreich hergestellt. Und ein Besitzerkonto angelegt.</p>
+        <p>Aus Sicherheitsgründen wurde das Installationsskript zu install.bak umbenannt.</p>
+        <p><a href="index.php">Zur Seite ...</a></p>
         <?php
         rename("install.php", "install.bak");
     }

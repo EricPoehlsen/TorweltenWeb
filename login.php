@@ -2,7 +2,6 @@
     $login = 0;
     session_name("Torwelten");
     session_start();
-    include_once "_lang.php";
 
     // connect to database
     include "config.php";
@@ -60,28 +59,28 @@
 <?php
     switch ($login) { // Header based on Login result
         case -2:
-            echo "<h1>{$M['h_logout']}</h1>";
+            echo "<h1>Sitzung beendet</h1>";
             break;
         case -1:
-            echo "<h1>{$M['h_login_failed']}</h1>";
+            echo "<h1>Anmeldung</h1>";
             break;
         case 0:
-            echo "<h1>{$M['h_login']}</h1>";
+            echo "<h1>Anmeldung fehlgeschlagen</h1>";
             break;
         case 1:
-            echo "<h1>{$M['h_login_success']}</h1>";
+            echo "<h1>Anmeldung erfolgreich</h1>";
             break;
     }
     if ($login == -1 OR $login == 0) { // show the login form?
         ?>
         <form method="POST">
-            <input placeholder="<?php echo $M["b_username"];?>" name="user"/>
-            <input placeholder="<?php echo $M["b_password"];?>" name="pass" type="password"/>
-            <input value="<?php echo $M["b_login"];?>" type="submit"/>
+            <input placeholder="Benutzer" name="user"/>
+            <input placeholder="Passwort" name="pass" type="password"/>
+            <input value="Anmelden" type="submit"/>
         </form>
         <?php
     }
 ?>
-<a href="index.php"><?php echo $M["l_continue"]; ?></a>
+<a href="index.php">Weiter ...</a>
 </body>
 </html>

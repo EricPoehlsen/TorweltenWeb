@@ -1,11 +1,10 @@
 <?php 
     ini_set('display_errors', 1); 
-    include_once "_lang.php";
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Install</title>
+        <title>Installation</title>
     </head>
     <body>
         <?php

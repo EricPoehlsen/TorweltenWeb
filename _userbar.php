@@ -1,12 +1,12 @@
 <?php
 if (isset($_SESSION["userid"])) {
-    echo "<p><a href='login.php?logout'>Logout</a></p>";
+    echo "<p><a href='login.php?logout'>Abmelden</a></p>";
 } else {
     ?>
 <form method="POST" action="login.php">
-    <input placeholder="username" name="user"/>
-    <input placeholder="password" name="pass" type="password"/>
-    <input value="login" type="submit"/>
+    <input placeholder="Benutzer" name="user"/>
+    <input placeholder="Passwort" name="pass" type="password"/>
+    <input value="Anmelden" type="submit"/>
 </form>
     <?php
 }

@@ -20,20 +20,20 @@
     if ($admin->rowCount() == 0) {
         ?>
         <form method="POST">
-        <h1><?php echo $M["h_register_owner"]; ?></h1>
-        <?php echo $M["t_username"]; ?><input name="user"/><br/>
-        <?php echo $M["t_mail"]; ?><input name="mail" type="email"/><br>
-        <?php echo $M["t_password"]; ?><input name="pass" type="password"/><br/>
-        <?php echo $M["t_password"]; ?><input name="pchk" type="password"/><br/>
-        <input type="Submit" value="<?php echo $M["b_register"]; ?>"/>
+        <h1>Besitzerkonto anlegen</h1>
+        <p>Benutzername: <input name="user"/></p>
+        <p>E-Mail: <input name="mail" type="email"/></p>
+        <p>Passwort: <input name="pass" type="password"/></p>
+        <p>Passwort: <input name="pchk" type="password"/></p>
+        <input type="Submit" value="Registrieren"/>
         </form>
         <?php
     } else {
         $owner = $admin->fetchAll()[0]["username"];
         ?>
-        <h1><?php echo $M["h_owner_exists"]; ?></h1>
-        <p><?php echo str_replace("OWNER", $owner, $M["t_ownerinfo"]); ?></p>
-        <p><a href="install.php"><?php echo $M["l_continue"]; ?></a></p>
+        <h1>Besitzerkonto angelegt</h1>
+        <p>Der Benutzer <i><?php echo $owner; ?> wurde als Besitzerkonto im System registriert.</p>
+        <p><a href="install.php">Weiter ...</a></p>
         <?php
     }
 
