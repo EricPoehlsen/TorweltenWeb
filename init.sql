@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS logins;
+DROP TABLE IF EXISTS characters;
 
 CREATE TABLE users (
     userid int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -16,7 +17,7 @@ CREATE TABLE logins (
     expires TIMESTAMP
 );
 
-CREATE TABLE characters {
+CREATE TABLE characters (
     charid int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     userid int NOT NULL,
     charname varchar(255),
@@ -33,4 +34,4 @@ CREATE TABLE characters {
     cur_lp decimal(3,1) DEFAULT 0.0,
     cur_ep decimal(3,1) DEFAULT 0.0,
     cur_mp decimal(3,1) DEFAULT 0.0
-};
+);

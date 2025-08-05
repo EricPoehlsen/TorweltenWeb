@@ -11,6 +11,6 @@
         <p>Aus Sicherheitsgründen wurde das Installationsskript zu install.bak umbenannt.</p>
         <p><a href="index.php">Zur Seite ...</a></p>
         <?php
-        rename("install.php", "install.bak");
+        // rename("install.php", "install.bak");
     }
 ?>
