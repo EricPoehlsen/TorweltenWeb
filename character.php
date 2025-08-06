@@ -9,6 +9,13 @@ ini_set('display_errors', 1);
     $dsn = "mysql:dbname=$db_name;host=$db_serv";
     $db = new PDO($dsn, $db_user, $db_pass);
 
+    //character data
+    $c = [];
+    $c["charname"] = "";
+    $c["species"] = "";
+    $c["concept"] = "";
+    
+
     // handle POST
     if (isset($_POST["charname"])) {
         //new character
@@ -20,14 +27,13 @@ ini_set('display_errors', 1);
     }
 
     //load character
-    if (isset($_GET["id"]) && is_int($_GET["id"])) {
-        $id = $_GET["id"];
+    if (isset($_GET["id"])) {
+        $id = intval($_GET["id"]);
         $sql = "SELECT * FROM characters WHERE charid = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
+        $c = $stmt->fetch();
     }
-
-
 
 ?>
 <!DOCTYPE html>
@@ -39,9 +45,9 @@ ini_set('display_errors', 1);
     <div id="userbar"><?php include "_userbar.php"; ?></div>
 
     <form method="POST">
-        <label for="charname">Name:</label><input name="charname" id="charname" />
-        <label for="species">Spezies:</label><input name="species" id="species" />
-        <label for="concept">Konzept:</label><input name="concept" id="concept" />
+        <label for="charname">Name:</label><input name="charname" id="charname" value="<?php echo $c["charname"]; ?>"/>
+        <label for="species">Spezies:</label><input name="species" id="species" value="<?php echo $c["species"]; ?>"/>
+        <label for="concept">Konzept:</label><input name="concept" id="concept" value="<?php echo $c["concept"]; ?>"/>
         <input type="submit" value="Speichern" />
     </form>
 
