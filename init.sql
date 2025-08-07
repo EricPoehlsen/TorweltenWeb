@@ -43,5 +43,5 @@ CREATE TABLE xplog (
     userid int NOT NULL,
     xp int NOT NULL,
     reason varchar(255),
-    changed DATETIME DEFAULT CURRENT_TIMESTAMP,
+    changed DATETIME DEFAULT CURRENT_TIMESTAMP
 );
