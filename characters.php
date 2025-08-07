@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
         }
     ?>
 
-
+    <p><a href="newcharacter.php">Neuen Charakter anlegen</a></p>
 
 
 </body>

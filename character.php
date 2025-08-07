@@ -14,18 +14,8 @@ ini_set('display_errors', 1);
     $c["charname"] = "";
     $c["species"] = "";
     $c["concept"] = "";
+    $c["charid"] = "0";
     
-
-    // handle POST
-    if (isset($_POST["charname"])) {
-        //new character
-        if (!isset($_SESSION["charid"])){
-            $sql = "INSERT INTO characters (userid, charname, species, concept) VALUES (?, ?, ?, ?)";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([intval($_SESSION["userid"]), $_POST["charname"], $_POST["species"], $_POST["concept"]]);
-        }
-    }
-
     //load character
     if (isset($_GET["id"])) {
         $id = intval($_GET["id"]);
@@ -35,11 +25,15 @@ ini_set('display_errors', 1);
         $c = $stmt->fetch();
     }
 
+
+    $charid = $c["charid"];
+
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
+        <script src="script.js"></script>
 </head>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>
@@ -48,10 +42,18 @@ ini_set('display_errors', 1);
         <label for="charname">Name:</label><input name="charname" id="charname" value="<?php echo $c["charname"]; ?>"/>
         <label for="species">Spezies:</label><input name="species" id="species" value="<?php echo $c["species"]; ?>"/>
         <label for="concept">Konzept:</label><input name="concept" id="concept" value="<?php echo $c["concept"]; ?>"/>
-        <input type="submit" value="Speichern" />
     </form>
 
-
+    <?php 
+    if ($c["charid"] > 0) { 
+    ?>
+        <label for="phy">PHY</label>
+        <button onclick="updateAttrib('phy','dec','<?php echo $charid; ?>')">-</button>
+        <input id="phy" size="2" value="<?php echo $c["phy"]; ?>"/>
+        <button onclick="updateAttrib('phy','inc','<?php echo $charid; ?>')">+</button>
+    <?php 
+    } 
+    ?>
 
 </body>
 </html>
