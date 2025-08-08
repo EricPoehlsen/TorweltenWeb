@@ -7,10 +7,16 @@ ini_set('display_errors', 1);
     // generate the attribute view
     function attribView($attr, $charid, $value) {
         $attr_upper = strtoupper($attr);
-        echo "<label for=\"$attr\">$attr_upper</label>";
+        echo "<div class=\"attr\">";
+        echo "<div>";
+        echo "<label class=\"attr\" for=\"$attr\">$attr_upper</label>";
+        echo "</div>";
+        echo "<div>";
         echo "<button onclick=\"updateAttrib('$attr','dec','$charid')\"> - </button>";
         echo "<input id=\"$attr\" size=\"2\" value=\"$value\"/>";
         echo "<button onclick=\"updateAttrib('$attr','inc','$charid')\"> + </button>";
+        echo "</div>";
+        echo "</div>";
     }
 
 
@@ -55,21 +61,14 @@ ini_set('display_errors', 1);
         <label for="species">Spezies:</label><input name="species" id="species" value="<?php echo $c["species"]; ?>"/>
         <label for="concept">Konzept:</label><input name="concept" id="concept" value="<?php echo $c["concept"]; ?>"/>
     </form>
+    <div class="attributes">
     <?php 
     //display the attribute views for the attributes
     $attribs = array("phy", "men", "soz", "nk", "fk", "lp", "ep", "mp");
     foreach ($attribs as $attr) {
         attribView($attr, $c["charid"], $c[$attr]);
     }
-    
     ?>
-
-
-
-
-
-
-
-
+    </div>
 </body>
 </html>

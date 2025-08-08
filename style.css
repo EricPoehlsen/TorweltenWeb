@@ -9,6 +9,7 @@
 body {
     background: var(--black);
     color: var(--white);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 input {
@@ -33,4 +34,26 @@ button:hover {
 
 a {
     color: var(--orange);
+}
+
+.attr {
+    background: var(--grey);
+    margin: 10px;
+    padding: 10px;   
+}
+
+.attrsub {
+    width: 100%;
+}
+
+label.attr {
+    font-weight: bold;
+    text-align: center;
+}
+
+.attributes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
 }
