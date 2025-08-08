@@ -26,7 +26,7 @@
 <html>
     <head>
         <title></title>
-        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>

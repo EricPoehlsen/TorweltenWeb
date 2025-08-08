@@ -14,6 +14,7 @@ ini_set('display_errors', 1);
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>

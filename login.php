@@ -54,6 +54,7 @@
 <html>
 <head>
 <title>Login</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <?php

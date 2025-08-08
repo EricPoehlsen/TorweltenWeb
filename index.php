@@ -1,13 +1,15 @@
 <?php 
+ini_set('display_errors', 1); 
 include "_checklogin.php";
-ini_set('display_errors', 1); ?>
+?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>
-    <p>Hallo</p>
+    <a href="characters.php">Charakterliste</a>
 </body>
 </html>

@@ -1,0 +1,36 @@
+:root {
+    --black: #111;
+    --white: #ddd;
+    --grey: #666;
+    --orange: #e60;
+}
+
+
+body {
+    background: var(--black);
+    color: var(--white);
+}
+
+input {
+    background-color: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 3px;
+    text-align: center;
+}
+
+button {
+    background-color: var(--grey);
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 3px;
+    text-align: center;
+}
+
+button:hover {
+    border: 2px solid var(--orange);
+}
+
+a {
+    color: var(--orange);
+}

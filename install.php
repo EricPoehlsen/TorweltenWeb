@@ -5,6 +5,7 @@
 <html>
     <head>
         <title>Installation</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <?php

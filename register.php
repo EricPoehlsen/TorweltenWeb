@@ -34,6 +34,17 @@
             $error = "Passwörter stimmen nicht überein!";
         }
     } 
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Installation</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+<?php
+
+
 
     //display form only if the user was not yet created. 
     if ($user_created == false) {
@@ -57,3 +68,6 @@
     }
 
 ?>
+
+</body>
+</html>
