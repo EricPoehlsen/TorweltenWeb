@@ -15,22 +15,29 @@ ini_set('display_errors', 1);
     $c["species"] = "";
     $c["concept"] = "";
     $c["charid"] = "0";
-    
-    //load character
+
+    $skills = [];
+    $charskills = [];
+
+    //get data
     if (isset($_GET["id"])) {
+        // character data
         $id = intval($_GET["id"]);
         $sql = "SELECT * FROM characters WHERE charid = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $c = $stmt->fetch();
+    
+        // all skills
+        $sql = "SELECT * FROM skills ORDER BY id";
+        $stmt = $db->query($sql);
+        $skills = $stmt->fetchAll();
+        
+
+        $sql = "SELECT * FROM charskills WHERE charid = ?";
+        $stmt = $db->prepare($sql);
+
     }
-
-    $charid = $c["charid"];
-
-    $sql = "SELECT * FROM skills ORDER BY id";
-    $stmt = $db->query($sql);
-    $skills = $stmt->fetchAll();
-
 
 
 ?>
@@ -39,13 +46,18 @@ ini_set('display_errors', 1);
     <head>
         <title></title>
         <link rel="stylesheet" href="style.css">
+        <script src="skills.js"></script>
 </head>
-<body>
+<body onload="getSkills(<?php echo $c['charid']; ?>)">
     <div id="userbar"><?php include "_userbar.php"; ?></div>
+    <label for="search">Suche:</label>
+    <input id="search" onkeyup="getSkills(<?php echo $c['charid']; ?>)" />
+    <div id="skilllist"></div>
+    
     <?php
-    foreach ($skills as $skill) {
-        echo "<p>{$skill['skill']}</p>";
-    }
+    //foreach ($skills as $skill) {
+    //    echo "<p>{$skill['skill']}</p>";
+    //}
     ?>
   
 </body>
