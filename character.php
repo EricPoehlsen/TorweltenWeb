@@ -70,5 +70,6 @@ ini_set('display_errors', 1);
     }
     ?>
     </div>
+    <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten hinzufügen</a>
 </body>
 </html>
