@@ -1,6 +1,5 @@
 <?php 
 include "_checklogin.php";
-ini_set('display_errors', 1); 
 
 // This page shows all characters of a user
 

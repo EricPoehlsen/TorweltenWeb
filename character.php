@@ -1,6 +1,5 @@
 <?php 
 include "_checklogin.php";
-ini_set('display_errors', 1); 
 
     // This page manages a single character
 

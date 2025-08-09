@@ -57,3 +57,14 @@ label.attr {
     justify-content: space-between;
     align-items: stretch;
 }
+
+.skillline {
+    display: flex;
+    flex-direction: row;
+}
+
+.skill {
+    background: var(--grey);
+    padding: 10px;
+    margin: 5px;
+}

@@ -77,8 +77,6 @@ CREATE TABLE charskills (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     charid int NOT NULL,
     skillid int NOT NULL,
-    skill VARCHAR(255) NOT NULL,
-    lvl INT NOT NULL DEFAULT 0,
-    stype CHAR(1) NOT NULL,
-    base BOOLEAN
+    stype char(1) NOT NULL,
+    lvl INT NOT NULL DEFAULT 0
 );

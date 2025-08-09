@@ -1,6 +1,5 @@
 <?php 
 include "_checklogin.php";
-ini_set('display_errors', 1); 
 
 // This page is used to add skills to a character
 
@@ -35,10 +34,8 @@ if (isset($_POST["charid"])) {
     
     $sql = "SELECT * FROM charskills WHERE charid = ?";
     $stmt = $db->prepare($sql);
-    $stmt->execute([$sql]);
+    $stmt->execute([$_POST["charid"]]);
     $charskills = $stmt->fetchAll();
-
-    print_r($charskills);
 
     $result = [];
     foreach ($skills as $skill) {

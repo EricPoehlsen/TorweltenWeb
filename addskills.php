@@ -1,6 +1,5 @@
 <?php 
 include "_checklogin.php";
-ini_set('display_errors', 1); 
 
     // This page is used to add skills to a character
 
@@ -53,12 +52,5 @@ ini_set('display_errors', 1);
     <label for="search">Suche:</label>
     <input id="search" onkeyup="getSkills(<?php echo $c['charid']; ?>)" />
     <div id="skilllist"></div>
-    
-    <?php
-    //foreach ($skills as $skill) {
-    //    echo "<p>{$skill['skill']}</p>";
-    //}
-    ?>
-  
 </body>
 </html>
