@@ -68,3 +68,8 @@ label.attr {
     padding: 10px;
     margin: 5px;
 }
+
+.userbar {
+    width: 100%;
+    text-align: right;
+}

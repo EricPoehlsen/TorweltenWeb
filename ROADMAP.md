@@ -22,6 +22,10 @@ The core framework to display a page
 * 🟢 Allow users to register
 
 ## Stage 1 🟡
+### Framework
+* 🟢 Add characters table
+* 🟢 Add skills tables
+* 🔴 Add trait tables
 ### Characters
 * 🟢 Characters can be created and stored in the database
 * 🟢 Characters can be loaded from the database
@@ -35,7 +39,7 @@ The core framework to display a page
 * 🟢 Skills can be increased
 * 🔴 Skills can be decreased
 * 🔴 Skills can be removed
-* 🔴 Skills are displayed on character page
+* 🟡 Skills are displayed on character page
 * 🟡 XP cost of skills are recorded
 * 🔴 Implement character traits
 * 🔴 traits can be added to the character
@@ -47,32 +51,37 @@ The core framework to display a page
 
 ## Stage 2 🔴
 ### Framework
-* 🔴Printer friendly character page
+* 🔴 Printer friendly character page
 * 🔴 Create equipment table
+### Characters: Attributes
+* 🔴 Current attribute stats for lp, ep, mp
+* 🔴 damage and healing entry
 ### Characters: Skills
 * 🔴 Users can create skills
+* 🔴 Custom traits for characters
 ### Characters: Equipment
 * 🔴 Implement basic equipment
+* 🔴 Implement money
 ### Users
-* 🔴 Preferences 
+* 🔴 Preferences - longer login time
+* 🔴 Preferences - Sort order for Skills
 ### CSS
 * 🔴 Style the shapes of inputs and divs
 * 🔴 Create a print CSS
 
 ## Stage 3 🔴
-### Framework
+### Epics
 * 🔴 Add a dicer
+* 🔴 Live Path
+* 🔴 Campaigns
+* 🔴 Game Master Role
 ### CSS
 * 🔴 Advanced CSS features like animations
 
-## Stage 4
-### Framework
+## Stage 4 🔴
+### Epics
+* 🔴 NPCs
 * 🔴 Add clothing tool
-
-
-
-
-
 
 
 [README.md]
