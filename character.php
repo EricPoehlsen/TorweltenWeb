@@ -34,11 +34,27 @@ include "_checklogin.php";
     
     //load character
     if (isset($_GET["id"])) {
+        // basic data
         $id = intval($_GET["id"]);
         $sql = "SELECT * FROM characters WHERE charid = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $c = $stmt->fetch();
+        
+        //skills
+        $sql = "SELECT 
+                    skills.id AS id,
+                    charskills.lvl AS lvl, 
+                    skills.stype AS stype, 
+                    skills.skill AS skill
+                FROM charskills
+                INNER JOIN skills
+                ON skills.id = charskills.skillid
+                WHERE charskills.charid = ?
+                ORDER BY skills.id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        $skills = $stmt->fetchAll();
     }
 
 
@@ -67,8 +83,16 @@ include "_checklogin.php";
     foreach ($attribs as $attr) {
         attribView($attr, $c["charid"], $c[$attr]);
     }
+
     ?>
     </div>
-    <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten hinzufügen</a>
+    <div class="skillbox">
+    <?php 
+    foreach ($skills as $skill) {
+        echo "<div class='skill'>{$skill['skill']} - {$skill['lvl']}</div>";
+    }    
+    ?>
+    </div>
+    <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten ändern</a>
 </body>
 </html>
