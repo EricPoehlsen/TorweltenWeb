@@ -1,7 +1,7 @@
 <?php 
 include "_checklogin.php";
 
-// This page is used to add skills to a character
+// this code retrieves the skill list from the server
 
   // connect DB
 include "config.php";
@@ -21,41 +21,42 @@ if (isset($_POST["charid"])) {
     $skills = [];
     // all skills
     if ($_POST["input"] == "") {
-      $sql = "SELECT * FROM skills ORDER BY id";
-      $stmt = $db->query($sql);
-      $skills = $stmt->fetchAll();
-    } else {
-      $input = "%{$_POST["input"]}%";
-      $sql = "SELECT * FROM skills WHERE skill LIKE ? ORDER BY id";
-      $stmt = $db->prepare($sql);
-      $stmt->execute([$input]);
-      $skills = $stmt->fetchAll();
+        $sql = "SELECT * FROM skills ORDER BY id";
+        $stmt = $db->query($sql);
+        $skills = $stmt->fetchAll();
+    } else { // filtered by search
+        $input = "%{$_POST["input"]}%";
+        $sql = "SELECT * FROM skills WHERE skill LIKE ? ORDER BY id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$input]);
+        $skills = $stmt->fetchAll();
     }
     
+    // get character skills
     $sql = "SELECT * FROM charskills WHERE charid = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$_POST["charid"]]);
     $charskills = $stmt->fetchAll();
 
+    //build the list
     $result = [];
     foreach ($skills as $skill) {
-      $lvl = 0;
-      foreach ($charskills as $charskill) {
+        $lvl = 0;
+        foreach ($charskills as $charskill) { // character has skill ...
         if ($charskill["skillid"] == $skill["id"]) {
-          $lvl = $charskill["lvl"];
+            $lvl = $charskill["lvl"];
         }
-      }
-      $id = $skill["id"];
-      $result[$id] = array(
+        }
+        $id = $skill["id"];
+        $result[$id] = array(
         "skill" => $skill["skill"],
         "lvl" => $lvl,
         "stype" => $skill["stype"],
         "base" => $skill["base"]
-      );
+        );
     }
 
     $result = json_encode($result);
-
     echo $result;
 }
 
