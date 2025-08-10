@@ -849,11 +849,29 @@ INSERT INTO skills (id, skill, stype, base) VALUES
 (40017001, 'Řhu', 'S', 0),
 (40018001, 'Orionischer Standard', 'S', 0);
 
-
 CREATE TABLE charskills (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     charid int NOT NULL,
     skillid int NOT NULL,
     stype char(1) NOT NULL,
     lvl INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE traits (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title varchar(255) NOT NULL,
+    tdesc text NOT NULL,
+    maxrank tinyint DEFAULT 1,
+    xpcost tinyint DEFAULT 0,
+    traittype varchar(255) NOT NULL
+);
+
+CREATE TABLE chartraits (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title varchar(255) NOT NULL,
+    tdesc text NOT NULL,
+    currank tinyint DEFAULT 1,
+    maxrank tinyint DEFAULT 1,
+    xpcost tinyint DEFAULT 0,
+    traittype varchar(255) NOT NULL
 );

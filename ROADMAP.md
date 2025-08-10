@@ -25,7 +25,7 @@ The core framework to display a page
 ### Framework
 * 🟢 Add characters table
 * 🟢 Add skills tables
-* 🔴 Add traits tables
+* 🟡 Add traits tables
 * 🟢 addskills.php replace "+" div with a button 
 ### Characters
 * 🟢 Characters can be created and stored in the database
@@ -41,10 +41,12 @@ The core framework to display a page
 * 🟢 Skills can be decreased
 * 🟢 Skills can be removed
 * 🟡 Skills are displayed on character page
-* 🟡 XP cost of skills are recorded
+* 🟢 XP cost of skills are recorded
 * 🔴 Implement basic character traits
 * 🔴 traits can be added to the character
 * 🔴 XP costs of traits are recorded
+* 🟡  List of some traits is available in the database
+* 🔴 Add Psionik skills
 ### Users
 * 🔴 Check if user is owner of a character
 * 🔴 Characters can be private of public
@@ -55,6 +57,10 @@ The core framework to display a page
 ### Framework
 * 🔴 Printer friendly character page
 * 🔴 Create equipment table
+### Characters: Information
+* 🔴 Character description
+* 🔴 Character Background (simple)
+* 🔴 Access XP Log
 ### Characters: Attributes
 * 🔴 Current attribute stats for lp, ep, mp
 * 🔴 damage and healing
@@ -73,6 +79,8 @@ The core framework to display a page
 ## Stage 3 🔴
 ### Epics
 * 🔴 Game Master Role
+* 🔴 Implement Contacts
+* 🔴 Implement XS-Points
 ### Framework
 * 🔴 Printer friendly character page
 ### CSS
