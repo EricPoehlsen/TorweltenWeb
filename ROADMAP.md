@@ -55,7 +55,7 @@ The core framework to display a page
 * 🔴 Create equipment table
 ### Characters: Attributes
 * 🔴 Current attribute stats for lp, ep, mp
-* 🔴 damage and healing entry
+* 🔴 damage and healing q
 ### Characters: Skills
 * 🔴 Users can create skills
 * 🔴 Custom traits for characters
