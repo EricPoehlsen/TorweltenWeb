@@ -847,7 +847,7 @@ INSERT INTO skills (id, skill, stype, base) VALUES
 (40015001, 'Qya', 'S', 0),
 (40016001, 'Qyani', 'S', 0),
 (40017001, 'Řhu', 'S', 0),
-(40018001, 'Orionische Standard', 'S', 0);
+(40018001, 'Orionischer Standard', 'S', 0);
 
 
 CREATE TABLE charskills (

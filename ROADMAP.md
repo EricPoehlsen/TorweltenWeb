@@ -25,7 +25,8 @@ The core framework to display a page
 ### Framework
 * 🟢 Add characters table
 * 🟢 Add skills tables
-* 🔴 Add trait tables
+* 🔴 Add traits tables
+* 🟢 addskills.php replace "+" div with a button 
 ### Characters
 * 🟢 Characters can be created and stored in the database
 * 🟢 Characters can be loaded from the database
@@ -33,16 +34,17 @@ The core framework to display a page
 * 🟢 Attributes can be increased and decrease
 * 🟢 XP cost of attribute changes is recorded
 * 🟢 Implement character skills
-* 🟡 'Complete' list of skills in database 
+* 🟢 'Complete' list of skills in database 
 * 🟢 Skill list can be searched
 * 🟢 Skills can be added to a character
 * 🟢 Skills can be increased
-* 🔴 Skills can be decreased
-* 🔴 Skills can be removed
+* 🟢 Skills can be decreased
+* 🟢 Skills can be removed
 * 🟡 Skills are displayed on character page
 * 🟡 XP cost of skills are recorded
-* 🔴 Implement character traits
+* 🔴 Implement basic character traits
 * 🔴 traits can be added to the character
+* 🔴 XP costs of traits are recorded
 ### Users
 * 🔴 Check if user is owner of a character
 * 🔴 Characters can be private of public
@@ -55,33 +57,43 @@ The core framework to display a page
 * 🔴 Create equipment table
 ### Characters: Attributes
 * 🔴 Current attribute stats for lp, ep, mp
-* 🔴 damage and healing q
+* 🔴 damage and healing
 ### Characters: Skills
 * 🔴 Users can create skills
-* 🔴 Custom traits for characters
+### Characters: Traits
+* 🔴 Implement more complex traits
 ### Characters: Equipment
 * 🔴 Implement basic equipment
 * 🔴 Implement money
 ### Users
 * 🔴 Preferences - longer login time
 * 🔴 Preferences - Sort order for Skills
-### CSS
-* 🔴 Style the shapes of inputs and divs
-* 🔴 Create a print CSS
+
 
 ## Stage 3 🔴
 ### Epics
-* 🔴 Add a dicer
-* 🔴 Live Path
-* 🔴 Campaigns
 * 🔴 Game Master Role
+### Framework
+* 🔴 Printer friendly character page
 ### CSS
 * 🔴 Advanced CSS features like animations
+### Characters: Skills
+* 🔴 Add game relevance to skills
+* 🔴 Add custom sorting to character skills
+### CSS
+* 🔴 Style the shapes of inputs and divs
+* 🔴 Create a print CSS
+### Characters: Attributes
+* 🔴 Custom traits for characters
+
 
 ## Stage 4 🔴
 ### Epics
 * 🔴 NPCs
 * 🔴 Add clothing tool
+* 🔴 Add a dicer
+* 🔴 Live Path
+* 🔴 Campaigns
 
 
 [README.md]

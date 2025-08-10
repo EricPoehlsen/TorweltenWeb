@@ -21,14 +21,14 @@ function getSkills(charid) {
                 skillline.className = "skillline";
 
                 //create container for button
-                button = document.createElement("div");
+                button = document.createElement("button");
                 button.className = "skill";
                 button.setAttribute("id", key);
                 if (result[key]["lvl"] > 0) {
                     button.innerHTML = result[key]["lvl"]; 
                 } else {
                     button.innerHTML = "+"; 
-                    button.setAttribute("onClick", "increaseSkill("+key+", "+charid+")");
+                    button.setAttribute("onClick", "changeSkill(event, "+key+", "+charid+")");
                 }
                 skillline.appendChild(button);
 
@@ -51,20 +51,41 @@ function getSkills(charid) {
 }
 
 // add a character skill
-function increaseSkill(skillid, charid) {
+function changeSkill(event, skillid, charid) {
+    // get Position of the click:
+    clickpos = event.screenX;
+    button = document.getElementById(skillid);
+    box = button.getBoundingClientRect();
+    midpoint = box.left + (box.width/2);
+    
+    // increase if button clicked right - decrease if clicked left
+    action = ""
+    if (button.innerHTML == "+") {
+        action = "inc";
+    } else {
+        if (clickpos < midpoint) {
+            action = "dec";
+        } else {
+            action = "inc";
+        }
+    }
+
     xhr = new XMLHttpRequest();
+    xhr.open("POST", "modcharskill.php");
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send("skillid="+skillid+"&charid="+charid+"&action="+action); 
 
     //handle answer from server
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
-            lvlbox = document.getElementById(skillid);
-            lvlbox.innerHTML = xhr.responseText; 
+            button = document.getElementById(skillid);
+            if (xhr.responseText > 0) {
+                button.innerHTML = xhr.responseText;
+            } else {
+                button.innerHTML = "+";
+            } 
         }
     }
     
-    xhr.open("POST", "modcharskill.php");
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send("skillid="+skillid+"&charid="+charid);
-        
-    console.log(skillid);
+
 }

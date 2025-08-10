@@ -30,32 +30,64 @@ if (isset($_POST["charid"])) {
         $result = $stmt->fetch();
         $lvl = $result["lvl"];
         $stype = $result["stype"];
+        $xpcost = 0;
         
         // standard action = inc(rease), valid are also dec(rease) and del(ete)
         $action = "inc";
         if (isset($_POST["action"]) && in_array($_POST["action"], ["inc", "dec", "del"])) $action = $_POST["action"];
-        
+
+        // remove skill 
+        if ($action == "del") {
+            $cost = -($lvl * (1 + $lvl));
+            if ($stype != "A") $cost /= 2;
+            $xpcost = $cost;
+            $lvl = 0;
+        }   
+
         // increase skill level
         if ($action == "inc" && $lvl < 4) {
             $lvl += 1;
             $cost = 2;
             if ($stype != "A") $cost = 1;
             $xpcost = $lvl * $cost;
-            
-            // update skill
+        }
+
+        //decrease skill level
+        if ($action == "dec" && $lvl > 0) {
+            $cost = -2;
+            if ($stype != "A") $cost = -1;
+            $xpcost = $lvl * $cost;
+            $lvl -= 1;
+            if ($lvl == 0) $action = "del";
+        }
+                
+        // update skill
+        if ($lvl > 0) {
             $sql = "UPDATE charskills SET lvl = ? WHERE charid = ? AND skillid = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$lvl, $charid, $skillid]);
-
-            // log action
-            $reason = "Fertigkeit $skillname auf $lvl gesteigert";
-
-            $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES (?, ?, ?, ?)";
+        } else { // remove skill 
+            $sql = "DELETE FROM charskills WHERE charid = ? AND skillid = ?";
             $stmt = $db->prepare($sql);
-            $stmt->execute([$charid, $userid, $xpcost, $reason]);
+            $stmt->execute([$charid, $skillid]);
         }
 
-
+        // log action
+        $reason = "";
+        switch ($action) {
+            case "del":
+                $reason = "Fertigkeit $skillname gelöscht.";
+                break;
+            case "inc":
+                $reason = "Fertigkeit $skillname auf $lvl gesteigert";
+                break;
+            case "dec":
+                $reason = "Fertigkeit $skillname auf $lvl gesenkt";
+                break;
+        }
+        $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES (?, ?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$charid, $userid, $xpcost, $reason]);
 
     } else { // this is a new skill
         $sql = "SELECT stype FROM skills WHERE id = ?";

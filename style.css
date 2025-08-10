@@ -69,6 +69,10 @@ label.attr {
     margin: 5px;
 }
 
+button.skill {
+    width: 5em;
+}
+
 .userbar {
     width: 100%;
     text-align: right;
