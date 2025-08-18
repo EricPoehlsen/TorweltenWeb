@@ -34,9 +34,9 @@ include "_checklogin.php";
 </head>
 <body onload="getTraits(<?php echo $c['charid']; ?>)">
     <div id="userbar"><?php include "_userbar.php"; ?></div>
-    <h1>Attribute für <?php echo $c['charname'];?> wählen ...</h1>
+    <h1>Eigenschaften für <?php echo $c['charname'];?> auswählen ...</h1>
     <label for="search">Suche:</label>
-    <input id="search" />
+    <input id="search" onkeyup="getTraits(<?php echo $c['charid']; ?>)"/>
     <div id="traitlist">
     </div>
 </body>

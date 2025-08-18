@@ -30,7 +30,7 @@ function getTraits(charid) {
                     button.innerHTML = " "; 
                 } else {
                     button.innerHTML = "+"; 
-                    button.setAttribute("onClick", "addTrait(event, "+key+", "+charid+")");
+                    button.setAttribute("onClick", "addTrait("+key+", "+charid+")");
                 }
                 titleline.appendChild(button);
 
@@ -92,41 +92,22 @@ function toggleView(id) {
 
 
 // add a character skill
-function changeSkill(event, skillid, charid) {
-    // get Position of the click:
-    clickpos = event.screenX;
-    button = document.getElementById(skillid);
-    box = button.getBoundingClientRect();
-    midpoint = box.left + (box.width/2);
-    
-    // increase if button clicked right - decrease if clicked left
-    action = ""
-    if (button.innerHTML == "+") {
-        action = "inc";
-    } else {
-        if (clickpos < midpoint) {
-            action = "dec";
-        } else {
-            action = "inc";
-        }
-    }
-
+function addTrait(traitid, charid) {
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "modcharskill.php");
+    xhr.open("POST", "addchartrait.php");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send("skillid="+skillid+"&charid="+charid+"&action="+action); 
+    xhr.send("traitid="+traitid+"&charid="+charid); 
 
     //handle answer from server
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
-            button = document.getElementById(skillid);
+            console.log(xhr.responseText);
+            button = document.getElementById(traitid);
             if (xhr.responseText > 0) {
-                button.innerHTML = xhr.responseText;
+                button.innerHTML = " ";
             } else {
                 button.innerHTML = "+";
             } 
         }
     }
-    
-
 }
