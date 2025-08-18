@@ -4,7 +4,6 @@ function getTraits(charid) {
     var charid = charid;
     xhr = new XMLHttpRequest();
 
-
     //handle answer from server
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
@@ -15,41 +14,53 @@ function getTraits(charid) {
             traitlist.innerHTML = ""
 
             Object.keys(result).forEach(function(key) {
-                //create container for each line
-                traitline = document.createElement("div");
-                traitline.className = "traitline";
+                //create container for each trait
+                container = document.createElement("div");
+                container.className = "traitcontainer"
 
-                //create container for button
+                // title line
+                titleline = document.createElement("div");
+                titleline.className = "traitline"
+
+                // button to add trait
                 button = document.createElement("button");
                 button.className = "trait";
                 button.setAttribute("id", key);
-                if (result[key]["lvl"] > 0) {
-                    button.innerHTML = result[key]["lvl"]; 
+                if (result[key]["hastrait"] > 0) {
+                    button.innerHTML = " "; 
                 } else {
                     button.innerHTML = "+"; 
-                    button.setAttribute("onClick", "changeSkill(event, "+key+", "+charid+")");
+                    button.setAttribute("onClick", "addTrait(event, "+key+", "+charid+")");
                 }
-                traitline.appendChild(button);
+                titleline.appendChild(button);
 
-                //create container for name
+                // Title Text
                 traitname = document.createElement("div");
-                traitname.className = "trait"
                 traitname.setAttribute("onClick", "toggleView("+key+")");
                 traitname.innerHTML = result[key]["title"];
-                traitline.appendChild(traitname);
+                traitname.className = "traittitle";
+                titleline.appendChild(traitname);
+
+                // Cost
+                traitcost = document.createElement("div")
+                if (result[key]["maxrank"] > 1) {
+                    traitcost.innerHTML = "(" + result[key]["xpcost"] + " pro Rang)";
+                } else {
+                    traitcost.innerHTML = "(" + result[key]["xpcost"] + ")";
+                }
+                titleline.appendChild(traitcost);
+                container.appendChild(titleline);
 
                 //create container for description
                 traitdesc = document.createElement("div");
                 traitdesc.style.display = "none";
                 traitdesc.setAttribute("id", key + "desc");
-                traitdesc.setAttribute("ondblClick", "toggleEdit("+key+")");
-
                 traitdesc.innerHTML = result[key]["desc"];
-                traitline.appendChild(traitdesc);
+                container.appendChild(traitdesc);
                                 
                 
                 //add skill to list
-                traitlist.appendChild(traitline);
+                traitlist.appendChild(container);
             });
         }
     }
