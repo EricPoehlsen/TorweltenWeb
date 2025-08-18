@@ -19,23 +19,10 @@ include "_checklogin.php";
         $id = intval($_GET["id"]);
         $sql = "SELECT charname, charid FROM characters WHERE charid = ?";
         $stmt = $db->prepare($sql);
-        $char = $stmt->execute([$id]);
-        $data = $char->fetchAll();
-        if (len($data) > 0) $c = $data;
-
-
-
-        // all skills
-        $sql = "SELECT * FROM traits ORDER BY id";
-        $stmt = $db->query($sql);
-        $traits = $stmt->fetchAll();
-        
-
-        $sql = "SELECT * FROM charskills WHERE charid = ?";
-        $stmt = $db->prepare($sql);
-
+        $stmt->execute([$id]);
+        $data = $stmt->fetchAll();
+        if (count($data) > 0) $c = $data[0];
     }
-
 
 ?>
 <!DOCTYPE html>
@@ -47,21 +34,10 @@ include "_checklogin.php";
 </head>
 <body onload="getTraits(<?php echo $c['charid']; ?>)">
     <div id="userbar"><?php include "_userbar.php"; ?></div>
+    <h1>Attribute für <?php echo $c['charname'];?> wählen ...</h1>
     <label for="search">Suche:</label>
     <input id="search" />
-    <div id="traitlistlist">
-        <?php
-            echo $c["charname"];
-            foreach ($traits as $trait) {
-                echo "<div class='attribcontainer'>";
-                echo "<p>{$trait['title']}</p>";
-                
-                echo "</div>";
-            }
-        ?>
-
-
-
+    <div id="traitlist">
     </div>
 </body>
 </html>

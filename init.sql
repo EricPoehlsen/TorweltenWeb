@@ -921,6 +921,7 @@ VALUES
 
 CREATE TABLE chartraits (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    charid int NOT NULL,
     title varchar(255) NOT NULL,
     tdesc text NOT NULL,
     currank tinyint DEFAULT 1,

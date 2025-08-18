@@ -94,5 +94,7 @@ include "_checklogin.php";
     ?>
     </div>
     <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten ändern</a>
+
+    <a href="addtraits.php?id=<?php echo $c["charid"]; ?>">Eigenschaften ändern</a>
 </body>
 </html>
