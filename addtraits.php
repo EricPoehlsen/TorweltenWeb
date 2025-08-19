@@ -1,7 +1,7 @@
 <?php 
 include "_checklogin.php";
 
-    // This page is used to add attributes  to a character
+    // This page is used to add character traits
 
       // connect DB
     include "config.php";
@@ -30,7 +30,7 @@ include "_checklogin.php";
     <head>
         <title></title>
         <link rel="stylesheet" href="style.css">
-        <script src="traits.js"></script>
+        <script src="addtraits.js"></script>
 </head>
 <body onload="getTraits(<?php echo $c['charid']; ?>)">
     <div id="userbar"><?php include "_userbar.php"; ?></div>

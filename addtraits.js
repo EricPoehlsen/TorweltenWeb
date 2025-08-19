@@ -1,4 +1,4 @@
-//Retrieve and display skills based on search parameter 
+//Retrieve and display traits based on search parameter 
 //charid is character id
 function getTraits(charid) {
     var charid = charid;
@@ -10,9 +10,10 @@ function getTraits(charid) {
             const result = JSON.parse(xhr.responseText);
             traitlist = document.getElementById("traitlist");
                         
-            //clear the skill list
+            //clear the trait list
             traitlist.innerHTML = ""
 
+            // rebuild it
             Object.keys(result).forEach(function(key) {
                 //create container for each trait
                 container = document.createElement("div");

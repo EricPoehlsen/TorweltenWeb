@@ -55,6 +55,12 @@ include "_checklogin.php";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $skills = $stmt->fetchAll();
+
+        //traits
+        $sql = "SELECT * FROM chartraits WHERE charid = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        $traits = $stmt->fetchAll();
     }
 
 
@@ -66,6 +72,8 @@ include "_checklogin.php";
     <head>
         <title></title>
         <script src="script.js"></script>
+        <script src="edittraits.js"></script>
+
         <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -95,6 +103,22 @@ include "_checklogin.php";
     </div>
     <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten ändern</a>
 
-    <a href="addtraits.php?id=<?php echo $c["charid"]; ?>">Eigenschaften ändern</a>
+    <div id="traitbox">
+    <?php 
+    foreach ($traits as $trait) {
+        echo "<div class=\"traitcontainer\">";
+        echo "<div class=\"traitline\">";
+        echo "<div id=\"trait.title.{$trait['id']}\">{$trait['title']}</div>";
+        $rank = "";
+        if ($trait["maxrank"] > 1) $rank = "<div id=\"trait.rank.{$trait['id']}\">[{$trait['currank']}]</div>";
+        echo $rank;
+        echo "</div>";
+        echo "<div id=\"trait.desc,{$trait['id']}\">{$trait['tdesc']}</div>";
+        echo "</div>";
+    }    
+    ?>
+    </div>
+
+    <a href="addtraits.php?id=<?php echo $c["charid"]; ?>">Eigenschaften hinzufügen</a>
 </body>
 </html>

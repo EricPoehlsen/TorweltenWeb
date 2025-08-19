@@ -25,7 +25,7 @@ The core framework to display a page
 ### Framework
 * 🟢 Add characters table
 * 🟢 Add skills tables
-* 🟡 Add traits tables
+* 🟢 Add traits tables
 * 🟢 addskills.php replace "+" div with a button 
 ### Characters
 * 🟢 Characters can be created and stored in the database
@@ -42,10 +42,12 @@ The core framework to display a page
 * 🟢 Skills can be removed
 * 🟡 Skills are displayed on character page
 * 🟢 XP cost of skills are recorded
-* 🔴 Implement basic character traits
-* 🔴 traits can be added to the character
-* 🔴 XP costs of traits are recorded
-* 🟡  List of some traits is available in the database
+* 🟢 Implement basic character traits
+* 🟢 traits can be added to the character
+* 🟢 Traits can be modified
+* 🟢 Traits are displayed on character
+* 🟡 XP costs of traits are recorded
+* 🟡 List of some traits is available in the database
 * 🔴 Add Psionik skills
 ### Users
 * 🔴 Check if user is owner of a character
