@@ -72,7 +72,6 @@ include "_checklogin.php";
     <head>
         <title></title>
         <script src="script.js"></script>
-        <script src="edittraits.js"></script>
 
         <link rel="stylesheet" href="style.css">
 </head>
@@ -107,13 +106,14 @@ include "_checklogin.php";
     <?php 
     foreach ($traits as $trait) {
         echo "<div class=\"traitcontainer\">";
-        echo "<div class=\"traitline\">";
+        echo "<div id=\"trait.header.{$trait['id']}\" class=\"traitline\">";
         echo "<div id=\"trait.title.{$trait['id']}\">{$trait['title']}</div>";
         $rank = "";
         if ($trait["maxrank"] > 1) $rank = "<div id=\"trait.rank.{$trait['id']}\">[{$trait['currank']}]</div>";
         echo $rank;
+        echo "<a href=\"editchartrait.php?charid={$c['charid']}&traitid={$trait['id']}\" class=\"traitedit\">🖋︎</a>";
         echo "</div>";
-        echo "<div id=\"trait.desc,{$trait['id']}\">{$trait['tdesc']}</div>";
+        echo "<div id=\"trait.desc.{$trait['id']}\">{$trait['tdesc']}</div>";
         echo "</div>";
     }    
     ?>

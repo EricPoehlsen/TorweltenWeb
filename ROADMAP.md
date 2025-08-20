@@ -40,7 +40,7 @@ The core framework to display a page
 * 🟢 Skills can be increased
 * 🟢 Skills can be decreased
 * 🟢 Skills can be removed
-* 🟡 Skills are displayed on character page
+* 🟢 Skills are displayed on character page
 * 🟢 XP cost of skills are recorded
 * 🟢 Implement basic character traits
 * 🟢 traits can be added to the character
