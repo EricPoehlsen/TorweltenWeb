@@ -73,16 +73,6 @@ function getTraits(charid) {
     xhr.send("charid="+charid+"&input="+input);
 }
 
-// toggles the description field editable
-function toggleEdit(id) {
-    text = document.getElementById(id+"desc");
-    if (text.hasAttribute("contenteditable")) {
-        text.removeAttribute("contenteditable");
-    } else {
-        text.setAttribute("contenteditable", "true");
-    }
-}
-
 function toggleView(id) {
     text = document.getElementById(id+"desc");
     if (text.style.display == "block") {
