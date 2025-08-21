@@ -128,14 +128,19 @@ a.charname:hover{
     color: var(--orange);
 }
 
+button.addtrait {
+    width: 2em;
+}
 
+button.addtrait:disabled {
+    color: var(--black);
+    border: 2px solid var(--black);
+}
 
 .traittitle {
     margin: 0px 10px;
     font-weight: bold;
 }
-
-
 
 input.traitname {
     width:100%;

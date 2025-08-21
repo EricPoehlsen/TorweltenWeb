@@ -15,8 +15,8 @@ include "_checklogin.php";
     if (isset($_POST['charid'])) $charid = $_POST['charid'];
     $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
     $stmt = $db->prepare($sql);
-    $data = $stmt->execute([$charid]);
-    $c = $data->fetch();
+    $stmt->execute([$charid]);
+    $c = $stmt->fetch();
     $editors = explode(",", $c["editors"]);
     $owner = $c["userid"];
     if (in_array($_SESSION["userid"], $editors)) $edit = true;
@@ -98,8 +98,8 @@ include "_checklogin.php";
     <div id="userbar"><?php include "_userbar.php"; ?></div>
 
     <form method="POST">
-    <div class="traitcontainer">
-        <div class="traitline">
+    <div class="container">
+        <div class="line">
         <label for="title">Bezeichnung:</label><input class="traitname" name="title" id="title" value="<?php echo $trait["title"]; ?>"/>
         <?php 
         if ($trait["maxrank"] > 1) { 
@@ -117,6 +117,7 @@ include "_checklogin.php";
         </div>
         <div>
         <input type="submit" name="update" value="Speichern"/>
+        <input type="submit" name="cancel" value="Abbrechen"/>
         <input type="submit" name="delete" value="Entfernen"/>
         <input type="hidden" name="id" value="<?php echo $trait['id'];?>"/>
         <input type="hidden" name="charid" value="<?php echo $charid;?>"/>

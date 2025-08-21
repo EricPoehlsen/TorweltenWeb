@@ -21,14 +21,15 @@ function getTraits(charid) {
 
                 // title line
                 titleline = document.createElement("div");
-                titleline.className = "traitline"
+                titleline.className = "line"
 
                 // button to add trait
                 button = document.createElement("button");
-                button.className = "trait";
+                button.className = "addtrait";
                 button.setAttribute("id", key);
                 if (result[key]["hastrait"] > 0) {
-                    button.innerHTML = " "; 
+                    button.innerHTML = "✓"; 
+                    button.disabled = true;
                 } else {
                     button.innerHTML = "+"; 
                     button.setAttribute("onClick", "addTrait("+key+", "+charid+")");
