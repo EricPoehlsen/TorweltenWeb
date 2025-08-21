@@ -21,7 +21,7 @@ The core framework to display a page
 * 🟢 Create admin user during installation
 * 🟢 Allow users to register
 
-## Stage 1 🟡
+## Stage 1 🟢 
 ### Framework
 * 🟢 Add characters table
 * 🟢 Add skills tables
@@ -31,7 +31,7 @@ The core framework to display a page
 * 🟢 Characters can be created and stored in the database
 * 🟢 Characters can be loaded from the database
 * 🟢 Implement character attributes
-* 🟢 Attributes can be increased and decrease
+* 🟢 Attributes can be increased and decreased
 * 🟢 XP cost of attribute changes is recorded
 * 🟢 Implement character skills
 * 🟢 'Complete' list of skills in database 
@@ -41,7 +41,7 @@ The core framework to display a page
 * 🟢 Skills can be decreased
 * 🟢 Skills can be removed
 * 🟢 Skills are displayed on character page
-* 🟢 XP cost of skills are recorded
+* 🟢 XP cost of skills is recorded
 * 🟢 Implement basic character traits
 * 🟢 traits can be added to the character
 * 🟢 Traits can be modified
@@ -49,7 +49,7 @@ The core framework to display a page
 * 🟢 XP costs of traits are recorded
 * 🟢 List of some traits is available in the database
 ### Users
-* 🟡 Only allow editing your own characters
+* 🟢 Only allow editing your own characters
 * 🟢 Characters can be private or public
 * 🟢 List only public characters to other players
 ### CSS
