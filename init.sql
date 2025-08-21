@@ -36,7 +36,7 @@ CREATE TABLE characters (
     cur_lp decimal(3,1) DEFAULT 0.0,
     cur_ep decimal(3,1) DEFAULT 0.0,
     cur_mp decimal(3,1) DEFAULT 0.0,
-    public boolean NOT NULL DEFAULT 1,
+    public boolean NOT NULL DEFAULT 0,
     editors varchar(255) DEFAULT ""
 );
 

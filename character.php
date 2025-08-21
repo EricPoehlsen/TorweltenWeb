@@ -71,7 +71,7 @@ include "_checklogin.php";
 <html>
     <head>
         <title></title>
-        <script src="script.js"></script>
+        <script src="character.js"></script>
 
         <link rel="stylesheet" href="style.css">
 </head>
@@ -120,5 +120,6 @@ include "_checklogin.php";
     </div>
 
     <a href="addtraits.php?id=<?php echo $c["charid"]; ?>">Eigenschaften hinzufügen</a>
+    <p><label for="public">öffentlich</label><input type="checkbox" onchange="setPublic(<?php echo $c['charid'];?>)" id="public" <?php if ($c['public'] == 1) echo "checked";?>/></p>
 </body>
 </html>
