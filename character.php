@@ -18,7 +18,7 @@ include "_checklogin.php";
         echo "</div>";
     }
 
-    $edit = false;
+    $edit = false; // if true the user can edit the character
 
     // connect DB
     include "config.php";
@@ -97,20 +97,21 @@ include "_checklogin.php";
     foreach ($attribs as $attr) {
         attribView($attr, $c["charid"], $c[$attr], $edit);
     }
+    echo "</div>";
 
-    ?>
-    </div>
-    <div class="skillbox">
-    <?php 
+
+    // display skills
+    echo "<div class=\"skillbox\">";
+
     foreach ($skills as $skill) {
         echo "<div class='skill'>{$skill['skill']} - {$skill['lvl']}</div>";
-    }    
-    ?>
-    </div>
-    <a href="addskills.php?id=<?php echo $c["charid"]; ?>">Fertigkeiten ändern</a>
+    }
+    
+    echo "</div>";
+    if ($edit) echo "<a href=\"addskills.php?id={$c['charid']}\">Fertigkeiten ändern</a>";
 
-    <div id="traitbox">
-    <?php 
+    //display traits
+    echo "<div id=\"traitbox\">";
     foreach ($traits as $trait) {
         echo "<div class=\"container\">";
         echo "<div id=\"trait.header.{$trait['id']}\" class=\"line\">";
@@ -118,15 +119,22 @@ include "_checklogin.php";
         $rank = "";
         if ($trait["maxrank"] > 1) $rank = "<div id=\"trait.rank.{$trait['id']}\">[{$trait['currank']}]</div>";
         echo $rank;
-        echo "<a href=\"editchartrait.php?charid={$c['charid']}&traitid={$trait['id']}\" class=\"traitedit\">🖋︎</a>";
+        if ($edit) echo "<a href=\"editchartrait.php?charid={$c['charid']}&traitid={$trait['id']}\" class=\"traitedit\">🖋︎</a>";
         echo "</div>";
         echo "<div id=\"trait.desc.{$trait['id']}\">{$trait['tdesc']}</div>";
         echo "</div>";
-    }    
-    ?>
-    </div>
-
-    <a href="addtraits.php?id=<?php echo $c["charid"]; ?>">Eigenschaften hinzufügen</a>
-    <p><label for="public">öffentlich</label><input type="checkbox" onchange="setPublic(<?php echo $c['charid'];?>)" id="public" <?php if ($c['public'] == 1) echo "checked";?>/></p>
+    }
+    echo "</div>";
+    if ($edit) echo "<a href=\"addtraits.php?id={$c['charid']}\">Eigenschaften hinzufügen</a>";
+    
+    // set character public;
+    if ($edit) {
+        echo "<p><label for=\"public\">öffentlich</label>";
+        $checked = "";
+        if ($c['public'] == 1) $checked = "checked";
+        echo "<input type=\"checkbox\" onchange=\"setPublic({$c['charid']})\" id=\"public\" $checked/></p>";
+    } 
+    
+?>
 </body>
 </html>
