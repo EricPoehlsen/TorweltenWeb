@@ -17,7 +17,7 @@ function getTraits(charid) {
             Object.keys(result).forEach(function(key) {
                 //create container for each trait
                 container = document.createElement("div");
-                container.className = "traitcontainer"
+                container.className = "container"
 
                 // title line
                 titleline = document.createElement("div");

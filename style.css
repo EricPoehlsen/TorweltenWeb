@@ -98,11 +98,29 @@ button.skill {
     text-align: right;
 }
 
-.traitcontainer {
+.container {
     background: var(--grey);
     padding: 10px;
     margin: 15px;
+    border: 2px solid var(--grey);
+
 }
+
+.container:hover {
+    border: 2px solid var(--orange);
+}
+
+a.charname{
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--white);
+}
+
+a.charname:hover{
+    color: var(--orange);
+}
+
+
 
 .traittitle {
     margin: 0px 10px;

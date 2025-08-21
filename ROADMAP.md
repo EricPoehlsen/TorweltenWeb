@@ -46,14 +46,16 @@ The core framework to display a page
 * 🟢 traits can be added to the character
 * 🟢 Traits can be modified
 * 🟢 Traits are displayed on character
-* 🟡 XP costs of traits are recorded
-* 🟡 List of some traits is available in the database
+* 🟢 XP costs of traits are recorded
+* 🟢 List of some traits is available in the database
 * 🔴 Add Psionik skills
 ### Users
 * 🔴 Check if user is owner of a character
-* 🔴 Characters can be private of public
+* 🔴 Only allow editing your own characters
+* 🟡 Characters can be private or public
+* 🟡 List only public characters to other players
 ### CSS
-* 🟡 Create a basic CSS
+* 🟢 Create a basic CSS
 
 ## Stage 2 🔴
 ### Framework

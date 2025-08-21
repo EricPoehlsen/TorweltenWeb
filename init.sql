@@ -35,7 +35,9 @@ CREATE TABLE characters (
     mp tinyint DEFAULT 4,
     cur_lp decimal(3,1) DEFAULT 0.0,
     cur_ep decimal(3,1) DEFAULT 0.0,
-    cur_mp decimal(3,1) DEFAULT 0.0
+    cur_mp decimal(3,1) DEFAULT 0.0,
+    public boolean NOT NULL DEFAULT 1,
+    editors varchar(255) DEFAULT ""
 );
 
 CREATE TABLE xplog (

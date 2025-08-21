@@ -105,7 +105,7 @@ include "_checklogin.php";
     <div id="traitbox">
     <?php 
     foreach ($traits as $trait) {
-        echo "<div class=\"traitcontainer\">";
+        echo "<div class=\"container\">";
         echo "<div id=\"trait.header.{$trait['id']}\" class=\"traitline\">";
         echo "<div id=\"trait.title.{$trait['id']}\">{$trait['title']}</div>";
         $rank = "";
