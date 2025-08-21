@@ -77,6 +77,10 @@ label.attr {
     justify-content: space-between;
     align-items: stretch;
 }
+.attribfield {
+    width: 100%;
+    box-sizing: border-box;    
+}
 
 .skillline {
     display: flex;
@@ -103,11 +107,15 @@ button.skill {
     padding: 10px;
     margin: 15px;
     border: 2px solid var(--grey);
-
 }
 
 .container:hover {
     border: 2px solid var(--orange);
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
 }
 
 a.charname{
@@ -127,10 +135,7 @@ a.charname:hover{
     font-weight: bold;
 }
 
-.traitline {
-    display: flex;
-    flex-direction: row;
-}
+
 
 input.traitname {
     width:100%;

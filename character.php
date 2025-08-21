@@ -4,21 +4,21 @@ include "_checklogin.php";
     // This page manages a single character
 
     // generate the attribute view
-    function attribView($attr, $charid, $value) {
+    function attribView($attr, $charid, $value, $edit) {
         $attr_upper = strtoupper($attr);
         echo "<div class=\"attr\">";
         echo "<div>";
         echo "<label class=\"attr\" for=\"$attr\">$attr_upper</label>";
         echo "</div>";
-        echo "<div>";
-        echo "<button onclick=\"updateAttrib('$attr','dec','$charid')\"> - </button>";
-        echo "<input id=\"$attr\" size=\"2\" value=\"$value\"/>";
-        echo "<button onclick=\"updateAttrib('$attr','inc','$charid')\"> + </button>";
+        echo "<div class=\"line\">";
+        if ($edit) echo "<button onclick=\"updateAttrib('$attr','dec','$charid')\"> - </button>";
+        echo "<input class=\"attribfield\" id=\"$attr\" size=\"2\" value=\"$value\"/>";
+        if ($edit) echo "<button onclick=\"updateAttrib('$attr','inc','$charid')\"> + </button>";
         echo "</div>";
         echo "</div>";
     }
 
-
+    $edit = false;
 
     // connect DB
     include "config.php";
@@ -61,6 +61,13 @@ include "_checklogin.php";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $traits = $stmt->fetchAll();
+
+        // editor access
+        $editors = explode(",", $c["editors"]);
+        $owner = $c["userid"];
+        if (in_array($_SESSION["userid"], $editors)) $edit = true;
+        if ($_SESSION["userid"] == $owner) $edit = true;
+
     }
 
 
@@ -88,7 +95,7 @@ include "_checklogin.php";
     //display the attribute views for the attributes
     $attribs = array("phy", "men", "soz", "nk", "fk", "lp", "ep", "mp");
     foreach ($attribs as $attr) {
-        attribView($attr, $c["charid"], $c[$attr]);
+        attribView($attr, $c["charid"], $c[$attr], $edit);
     }
 
     ?>
@@ -106,7 +113,7 @@ include "_checklogin.php";
     <?php 
     foreach ($traits as $trait) {
         echo "<div class=\"container\">";
-        echo "<div id=\"trait.header.{$trait['id']}\" class=\"traitline\">";
+        echo "<div id=\"trait.header.{$trait['id']}\" class=\"line\">";
         echo "<div id=\"trait.title.{$trait['id']}\">{$trait['title']}</div>";
         $rank = "";
         if ($trait["maxrank"] > 1) $rank = "<div id=\"trait.rank.{$trait['id']}\">[{$trait['currank']}]</div>";

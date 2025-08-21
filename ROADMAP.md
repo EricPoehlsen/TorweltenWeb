@@ -50,7 +50,6 @@ The core framework to display a page
 * 🟢 List of some traits is available in the database
 * 🔴 Add Psionik skills
 ### Users
-* 🔴 Check if user is owner of a character
 * 🔴 Only allow editing your own characters
 * 🟢 Characters can be private or public
 * 🟢 List only public characters to other players

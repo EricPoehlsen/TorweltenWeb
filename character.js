@@ -8,8 +8,9 @@ function updateAttrib(attr,action,id) {
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
             const result = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText); 
+            if (result.error) return;
             document.getElementById(result.attr).value=result.value;
-            console.log(result.attr); 
         }
     }
 
