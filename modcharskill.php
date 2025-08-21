@@ -11,9 +11,23 @@ $db = new PDO($dsn, $db_user, $db_pass);
 // do we have a POST access to this resource?
 if (isset($_POST["charid"])) {
     $userid = $_SESSION["userid"];
+    $charid = intval($_POST["charid"]);
+    
+    //ACL check
+    $edit = false;
+    $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
+    $stmt = $db->prepare($sql);
+    $data = $stmt->execute([$charid]);
+    $c = $data->fetch();
+    $editors = explode(",", $c["editors"]);
+    $owner = $c["userid"];
+    if (in_array($_SESSION["userid"], $editors)) $edit = true;
+    if ($_SESSION["userid"] == $owner) $edit = true;
+    if (!$edit) die;
+
+
     $lvl = 0;
     $stype = "A";
-    $charid = intval($_POST["charid"]);
     $skillid = intval($_POST["skillid"]);
 
     // get the skill name

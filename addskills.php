@@ -18,6 +18,9 @@ include "_checklogin.php";
     $skills = [];
     $charskills = [];
 
+    // user has edit rights?
+    $edit = false;
+
     //get data
     if (isset($_GET["id"])) {
         // character data
@@ -26,31 +29,35 @@ include "_checklogin.php";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $c = $stmt->fetch();
-    
-        // all skills
-        $sql = "SELECT * FROM skills ORDER BY id";
-        $stmt = $db->query($sql);
-        $skills = $stmt->fetchAll();
-        
 
-        $sql = "SELECT * FROM charskills WHERE charid = ?";
-        $stmt = $db->prepare($sql);
-
+        // has user editor access?
+        $editors = explode(",", $c["editors"]);
+        $owner = $c["userid"];
+        if (in_array($_SESSION["userid"], $editors)) $edit = true;
+        if ($_SESSION["userid"] == $owner) $edit = true;
     }
 
+    echo "<!DOCTYPE html>";
+    echo "<html>";
+    echo "<head>";
+    echo "<title>Fertigkeiten hinzufügen</title>";
+    echo "<link rel=\"stylesheet\" href=\"style.css\">";
+    echo "<script src=\"addskills.js\"></script>";
+    echo "</head>";
+    $script = "";
+    if ($edit) $script = " onload=\"getSkills({$c['charid']})\"";
+    echo "<body$script>";
+    echo "<div id=\"userbar\">";
+    include "_userbar.php";
+    echo "</div>";
+    if ($edit) {
+        echo "<label for=\"search\">Suche:</label>";
+        echo "<input id=\"search\" onkeyup=\"getSkills({$c['charid']})\"/>";
+        echo "<div id=\"skilllist\"></div>";
 
+    } else {
+        echo "<p>Kein Zugriff!</p>";
+    }
+    echo "</body>";
+    echo "</html>";
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <link rel="stylesheet" href="style.css">
-        <script src="skills.js"></script>
-</head>
-<body onload="getSkills(<?php echo $c['charid']; ?>)">
-    <div id="userbar"><?php include "_userbar.php"; ?></div>
-    <label for="search">Suche:</label>
-    <input id="search" onkeyup="getSkills(<?php echo $c['charid']; ?>)" />
-    <div id="skilllist"></div>
-</body>
-</html>
