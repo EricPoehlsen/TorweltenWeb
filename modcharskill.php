@@ -125,7 +125,6 @@ if (isset($_POST["charid"])) {
             $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$charid, $userid, $xpcost, $reason]);
-
         } 
     }
     echo $lvl;

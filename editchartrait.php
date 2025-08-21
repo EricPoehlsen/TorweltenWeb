@@ -8,8 +8,22 @@ include "_checklogin.php";
     $dsn = "mysql:dbname=$db_name;host=$db_serv";
     $db = new PDO($dsn, $db_user, $db_pass);
 
-    $trait = [];
+    //ACL check
+    $edit = false;
+    $charid = 0;
+    if (isset($_GET['charid'])) $charid = $_GET['charid'];
+    if (isset($_POST['charid'])) $charid = $_POST['charid'];
+    $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
+    $stmt = $db->prepare($sql);
+    $data = $stmt->execute([$charid]);
+    $c = $data->fetch();
+    $editors = explode(",", $c["editors"]);
+    $owner = $c["userid"];
+    if (in_array($_SESSION["userid"], $editors)) $edit = true;
+    if ($_SESSION["userid"] == $owner) $edit = true;
+    if (!$edit) die;
 
+    $trait = [];
     // handle the $_GET to load the current data
     if (isset($_GET["traitid"])) {
         $charid = intval($_GET["charid"]);

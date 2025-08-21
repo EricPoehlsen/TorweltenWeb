@@ -9,17 +9,30 @@ $dsn = "mysql:dbname=$db_name;host=$db_serv";
 $db = new PDO($dsn, $db_user, $db_pass);
 
 //get data
-if (isset($_POST["charid"])) {
-    $charid = $_POST["charid"];
-    $public = $_POST["public"];
-    if ($public == "true") {
-        $sql = "UPDATE characters SET public=1 WHERE charid=?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$charid]);
-    } else {
-        $sql = "UPDATE characters SET public=0 WHERE charid=?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$charid]);
-    }
+$charid = $_POST["charid"];
+$public = $_POST["public"];
+
+//ACL check
+$edit = false;
+$sql = "SELECT userid, editors FROM characters WHERE charid = ?";
+$stmt = $db->prepare($sql);
+$data = $stmt->execute([$charid]);
+$c = $data->fetch();
+$editors = explode(",", $c["editors"]);
+$owner = $c["userid"];
+if (in_array($_SESSION["userid"], $editors)) $edit = true;
+if ($_SESSION["userid"] == $owner) $edit = true;
+if (!$edit) die;
+
+// Update the data
+if ($public == "true") {
+    $sql = "UPDATE characters SET public=1 WHERE charid=?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$charid]);
+} else {
+    $sql = "UPDATE characters SET public=0 WHERE charid=?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$charid]);
 }
+
 
