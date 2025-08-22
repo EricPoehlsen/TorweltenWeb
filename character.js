@@ -39,3 +39,25 @@ function setPublic(charid) {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send("public="+public+"&charid="+charid);
 }
+
+
+// this updates character information
+function updateInfo(event, charid, userid) {
+    xhr = new XMLHttpRequest();
+
+    //handle answer from server
+    xhr.onreadystatechange=function() {
+        if (xhr.readyState==4 && xhr.status==200) {
+            console.log(xhr.responseText); 
+        }
+    }
+
+    public = document.getElementById("public").checked;
+    console.log(public);
+
+
+    xhr.open("POST", "updateinfo.php");
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send("public="+public+"&charid="+charid);
+}
+

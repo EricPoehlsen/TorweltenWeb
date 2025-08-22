@@ -84,13 +84,18 @@ include "_checklogin.php";
 </head>
 <body>
     <div id="userbar"><?php include "_userbar.php"; ?></div>
-
-    <form method="POST">
-        <label for="charname">Name:</label><input name="charname" id="charname" value="<?php echo $c["charname"]; ?>"/>
-        <label for="species">Spezies:</label><input name="species" id="species" value="<?php echo $c["species"]; ?>"/>
-        <label for="concept">Konzept:</label><input name="concept" id="concept" value="<?php echo $c["concept"]; ?>"/>
-    </form>
-    <div class="attributes">
+    <?php
+        // basic character info
+        $script = "";
+        if ($edit) $script = "onkeyup=\"updateInfo(event, {$c['charid']}, {$_SESSION['userid']})\""; 
+        echo "<label for=\"charname\">Name:</label>";
+        echo "<input id=\"charname\" value=\"{$c["charname"]}\" $script/>";
+        echo "<label for=\"species\">Spezies:</label>";
+        echo "<input id=\"species\" value=\"{$c["species"]}\" $script/>";
+        echo "<label for=\"concept\">Konzept:</label>";
+        echo "<input id=\"concept\" value=\"{$c["concept"]}\" $script/>";
+    ?>
+        <div class="attributes">
     <?php 
     //display the attribute views for the attributes
     $attribs = array("phy", "men", "soz", "nk", "fk", "lp", "ep", "mp");
