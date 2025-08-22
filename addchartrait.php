@@ -23,8 +23,8 @@ include "_checklogin.php";
         $edit = false;
         $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
         $stmt = $db->prepare($sql);
-        $data = $stmt->execute([$charid]);
-        $c = $data->fetch();
+        $stmt->execute([$charid]);
+        $c = $stmt->fetch();
         $editors = explode(",", $c["editors"]);
         $owner = $c["userid"];
         if (in_array($_SESSION["userid"], $editors)) $edit = true;
@@ -52,4 +52,5 @@ include "_checklogin.php";
             $stmt = $db->prepare($sql);
             $stmt->execute([$charid, $userid, $trait["xpcost"], $reason]);
         }
+        echo $edit;
     }

@@ -24,7 +24,22 @@ include "_checklogin.php";
         if ($_SESSION["userid"] == $owner) $edit = true;
 
         if ($edit) {
+            $info = $_POST['info'];
+            $content = htmlspecialchars($_POST['content']);
+            $charid = $c['charid'];
 
-            return "... updating ...";
+            if (in_array($info, ["charname", "species", "concept"])) {
+                $sql = "UPDATE characters SET $info = ? WHERE charid = $charid";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([$content]);
+            }
+
+
+
+
+
+
+
+            echo "... updating ...";
         }
     }

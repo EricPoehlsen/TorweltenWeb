@@ -55,15 +55,19 @@ The core framework to display a page
 ### CSS
 * 🟢 Create a basic CSS
 
-## Stage 2 🔴
+## Stage 2 🟡
 ### Framework
 * 🔴 Printer friendly character page
+* 🔴 Create backgrounds table
 * 🔴 Create equipment table
 ### Characters: Information
+* 🟡 Character name, species and concept can be upgraded
 * 🔴 Character description
 * 🔴 Character Background (simple)
 * 🔴 Access XP Log
+* 🔴 Display XP on character
 ### Characters: Attributes
+* 🔴 Current attribute stats for lp, ep, mp
 * 🔴 Current attribute stats for lp, ep, mp
 * 🔴 damage and healing
 ### Characters: Skills

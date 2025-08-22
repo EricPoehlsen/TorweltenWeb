@@ -96,7 +96,8 @@ function addTrait(traitid, charid) {
             console.log(xhr.responseText);
             button = document.getElementById(traitid);
             if (xhr.responseText > 0) {
-                button.innerHTML = " ";
+                button.innerHTML = "✓"; 
+                button.disabled = true;                
             } else {
                 button.innerHTML = "+";
             } 

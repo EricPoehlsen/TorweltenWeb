@@ -48,16 +48,23 @@ function updateInfo(event, charid, userid) {
     //handle answer from server
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
-            console.log(xhr.responseText); 
+            console.log("XHR.text: "+xhr.responseText); 
         }
     }
 
-    public = document.getElementById("public").checked;
-    console.log(public);
+    element = event.target;
+    info = element.getAttribute('id');
+    content = ""
+    inputfields = ["charname", "concept", "species"];
 
+    if (inputfields.includes(info)) {
+        content = element.value;
+    } else {
+        content = element.innerHTML;
+    }
 
     xhr.open("POST", "updateinfo.php");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send("public="+public+"&charid="+charid);
+    xhr.send("info="+info+"&content="+content+"&charid="+charid);
 }
 
