@@ -15,7 +15,7 @@
             $db = new PDO($dsn, $db_user, $db_pass);
 
             //try to find userid based on token
-            $sql = "SELECT userid FROM logins WHERE token = ?";
+            $sql = "SELECT `userid` FROM `logins` WHERE `token` = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$token]);
             if ($stmt->rowCount()>0) {
@@ -24,7 +24,7 @@
 
             // get username and access based on userid
             if (isset($_SESSION["userid"])) {
-                $sql = ("SELECT username, access FROM users WHERE userid = ?");
+                $sql = ("SELECT `username`, `access` FROM `users` WHERE `userid` = ?");
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$_SESSION["userid"]]);
                 $result = $stmt->fetch();

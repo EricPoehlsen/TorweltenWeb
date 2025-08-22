@@ -4,7 +4,7 @@
 function getXP($db, $charid) {
     $xp = 0;
     
-    $sql = "SELECT xp FROM xplog WHERE charid = $charid";
+    $sql = "SELECT `xp` FROM `xplog` WHERE `charid` = $charid";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     foreach ($result as $row) {

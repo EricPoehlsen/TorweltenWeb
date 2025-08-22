@@ -12,7 +12,7 @@ $db = new PDO($dsn, $db_user, $db_pass);
 if (isset($_POST["charid"])) {
     // character data
     $id = intval($_POST["charid"]);
-    $sql = "SELECT * FROM characters WHERE charid = ?";
+    $sql = "SELECT * FROM `characters` WHERE `charid` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$id]);
     $c = $stmt->fetch();
@@ -21,12 +21,12 @@ if (isset($_POST["charid"])) {
     $traits = [];
     // all traits
     if ($_POST["input"] == "") {
-        $sql = "SELECT * FROM traits ORDER BY id";
+        $sql = "SELECT * FROM `traits` ORDER BY `id`";
         $stmt = $db->query($sql);
         $traits = $stmt->fetchAll();
     } else { // filtered by search
         $input = "%{$_POST["input"]}%";
-        $sql = "SELECT * FROM traits WHERE title LIKE ? ORDER BY id";
+        $sql = "SELECT * FROM `traits` WHERE `title` LIKE ? ORDER BY `id`";
         $stmt = $db->prepare($sql);
         $stmt->execute([$input]);
         $traits = $stmt->fetchAll();
@@ -34,7 +34,7 @@ if (isset($_POST["charid"])) {
 
    
     // get character skills
-    $sql = "SELECT * FROM chartraits WHERE charid = ?";
+    $sql = "SELECT * FROM `chartraits` WHERE `charid` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$_POST["charid"]]);
     $chartraits = $stmt->fetchAll();

@@ -12,7 +12,7 @@
     if(array_key_exists("user", $_POST)) {
         $user = $_POST["user"];
         $pass = $_POST["pass"];
-        $sql = "SELECT passhash, userid FROM users WHERE username = ?";
+        $sql = "SELECT `passhash`, `userid` FROM `users` WHERE `username` = ?";
         $userdata = $db->prepare($sql);
         $userdata->execute([$user]);
         if ($userdata->rowCount() == 1) {
@@ -27,7 +27,7 @@
                 $expire = new DateTime()->setTimestamp(time() + 3600);
                 $expires = $expire->format("Y-m-d H:i:s"); 
                 $userid = $userdata[0]["userid"];
-                $sql = "INSERT INTO logins (userid, token, expires) VALUES ('$userid', '$token', '$expires')";
+                $sql = "INSERT INTO `logins` (`userid`, `token`, `expires`) VALUES ('$userid', '$token', '$expires')";
                 $db->exec($sql);
                 //Send cookie
                 setcookie("TorweltenLogin", $token, $expire->getTimestamp());
@@ -41,7 +41,7 @@
         $token = $_COOKIE["TorweltenLogin"];
         $valid_token = preg_match("/^[0-9a-f]{128}$/", $token);
         if ($valid_token == true) {
-            $sql = "DELETE FROM logins WHERE token = ?";
+            $sql = "DELETE FROM `logins` WHERE `token` = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$token]);
         }

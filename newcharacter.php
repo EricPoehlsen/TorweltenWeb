@@ -14,9 +14,16 @@
     if (isset($_POST["charname"])) {
         //new character
         if (!isset($_SESSION["charid"])){
-            $sql = "INSERT INTO characters (userid, charname, species, concept) VALUES (?, ?, ?, ?)";
+            $charname = htmlspecialchars($_POST["charname"]);
+            $species = htmlspecialchars($_POST["species"]);
+            $concept = htmlspecialchars($_POST["concept"]);
+
+
+
+
+            $sql = "INSERT INTO `characters` (`userid`, `charname`, `species`, `concept`) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
-            $stmt->execute([intval($_SESSION["userid"]), $_POST["charname"], $_POST["species"], $_POST["concept"]]);
+            $stmt->execute([intval($_SESSION["userid"]), $charname, $species, $concept]);
             $charid = $db->lastInsertId();
         }
     }

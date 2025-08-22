@@ -16,8 +16,8 @@ $public = $_POST["public"];
 $edit = false;
 $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
 $stmt = $db->prepare($sql);
-$data = $stmt->execute([$charid]);
-$c = $data->fetch();
+$stmt->execute([$charid]);
+$c = $stmt->fetch();
 $editors = explode(",", $c["editors"]);
 $owner = $c["userid"];
 if (in_array($_SESSION["userid"], $editors)) $edit = true;
@@ -26,11 +26,11 @@ if (!$edit) die;
 
 // Update the data
 if ($public == "true") {
-    $sql = "UPDATE characters SET public=1 WHERE charid=?";
+    $sql = "UPDATE `characters` SET `public`=1 WHERE `charid`=?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$charid]);
 } else {
-    $sql = "UPDATE characters SET public=0 WHERE charid=?";
+    $sql = "UPDATE `characters` SET `public`=0 WHERE `charid`=?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$charid]);
 }

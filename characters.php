@@ -9,14 +9,14 @@ include "_checklogin.php";
     $db = new PDO($dsn, $db_user, $db_pass);
 
     //get characters from database
-    $sql = "SELECT charid, charname, species, concept, userid, editors FROM characters WHERE userid = ? OR public = 1";
+    $sql = "SELECT `charid`, `charname`, `species`, `concept`, `userid`, `editors` FROM `characters` WHERE `userid` = ? OR `public` = 1";
     $stmt = $db->prepare($sql);
     $stmt->execute([intval($_SESSION["userid"])]);
     $characters = $stmt->fetchAll();
 
     //get users from database
     $users = []; 
-    $sql = "SELECT userid, username FROM users";
+    $sql = "SELECT `userid`, `username` FROM `users`";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll();
     foreach ($result as $user) {

@@ -13,7 +13,7 @@ include "_checklogin.php";
     $charid = 0;
     if (isset($_GET['charid'])) $charid = $_GET['charid'];
     if (isset($_POST['charid'])) $charid = $_POST['charid'];
-    $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
+    $sql = "SELECT `userid`, `editors` FROM `characters` WHERE `charid` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$charid]);
     $c = $stmt->fetch();
@@ -29,7 +29,7 @@ include "_checklogin.php";
         $charid = intval($_GET["charid"]);
         $traitid = intval($_GET["traitid"]);
 
-        $sql = "SELECT * FROM chartraits WHERE id = ?";
+        $sql = "SELECT * FROM `chartraits` WHERE `id` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$traitid]);
         $result = $stmt->fetchAll();
@@ -43,7 +43,7 @@ include "_checklogin.php";
         $tdesc = htmlspecialchars($_POST['desc']);
         $newrank = intval($_POST['rank']);
 
-        $sql = "SELECT currank, xpcost FROM chartraits WHERE id = ?";
+        $sql = "SELECT `currank`, `xpcost` FROM `chartraits` WHERE `id` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$traitid]);
         $result = $stmt->fetchAll();
@@ -52,28 +52,28 @@ include "_checklogin.php";
 
         //update trait
         if (isset($_POST["update"])) {
-            $sql = "UPDATE chartraits SET title = ?, tdesc = ?, currank = ? WHERE id = ?";
+            $sql = "UPDATE `chartraits` SET `title` = ?, `tdesc` = ?, `currank` = ? WHERE `id` = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$title, $tdesc, $newrank, $id]);
 
             // log action
             $xpcost = $newrank * $xpcost - $currank * $xpcost;
             $reason = "Eigenschaft $title auf Rang $newrank geändert.";
-            $sql = "INSERT INTO xplog (userid, charid, reason, xp) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO `xplog` (`userid`, `charid`, `reason`, `xp`) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$_SESSION['userid'], $charid, $reason, $xpcost]);
         }
 
         //delete trait
         if (isset($_POST["delete"])) {
-            $sql = "DELETE FROM chartraits WHERE id = ?";
+            $sql = "DELETE FROM `chartraits` WHERE `id` = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$id]);
 
             // log action
             $xpcost = 0 - $currank * $xpcost;
             $reason = "Eigenschaft $title entfernt.";
-            $sql = "INSERT INTO xplog (userid, charid, reason, xp) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO `xplog` (`userid`, `charid`, `reason`, `xp`) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$_SESSION['userid'], $charid, $reason, $xpcost]);
         }

@@ -15,7 +15,7 @@ $dsn = "mysql:dbname=$db_name;host=$db_serv";
 $db = new PDO($dsn, $db_user, $db_pass);
 
 // check access
-$sql = "SELECT userid, editors FROM characters WHERE charid = $charid";
+$sql = "SELECT `userid`, `editors` FROM `characters` WHERE `charid` = $charid";
 $stmt = $db->query($sql);
 $check = $stmt->fetch();
 $editors = explode(",", $check["editors"]);
@@ -29,7 +29,7 @@ if ($access == 0) {
 }
 
 //get current value of attribute from the databas
-$sql = "SELECT $attr FROM characters WHERE charid = $charid";
+$sql = "SELECT $attr FROM `characters` WHERE `charid` = $charid";
 $stmt = $db->query($sql);
 if ($stmt->rowCount() == 0) {
     die;
@@ -42,7 +42,7 @@ if ($action == "inc") {
     
     //update the attribute
     $new_value = $cur_value + 1;
-    $sql = "UPDATE characters SET $attr = $new_value WHERE charid = $charid";
+    $sql = "UPDATE `characters` SET `$attr` = $new_value WHERE `charid` = $charid";
     $db->exec($sql);
 
     //calculate and log xp costs
@@ -50,7 +50,7 @@ if ($action == "inc") {
     $userid = $_SESSION["userid"];
     $attrname = strtoupper($attr);
     $reason = "Attribut $attrname auf $new_value gesteigert.";
-    $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES ($charid, $userid, $xp_cost, '$reason')";
+    $sql = "INSERT INTO xplog (`charid`, `userid`, `xp`, `reason`) VALUES ($charid, $userid, $xp_cost, '$reason')";
     $db->exec($sql);
 }
 
@@ -59,7 +59,7 @@ if ($action == "dec") {
     
     //update the attribute
     $new_value = $cur_value - 1;
-    $sql = "UPDATE characters SET $attr = $new_value WHERE charid = $charid";
+    $sql = "UPDATE `characters` SET `$attr` = $new_value WHERE `charid` = $charid";
     $db->exec($sql);
 
     //calculate and log xp costs
@@ -67,7 +67,7 @@ if ($action == "dec") {
     $userid = $_SESSION["userid"];
     $attrname = strtoupper($attr);
     $reason = "Attribut $attrname auf $new_value gesenkt.";
-    $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES ($charid, $userid, $xp_cost, '$reason')";
+    $sql = "INSERT INTO `xplog` (`charid`, `userid`, `xp`, `reason`) VALUES ($charid, $userid, $xp_cost, '$reason')";
     $db->exec($sql);
 }
 

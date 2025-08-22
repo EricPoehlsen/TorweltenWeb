@@ -61,7 +61,7 @@ The core framework to display a page
 * 🔴 Create backgrounds table
 * 🔴 Create equipment table
 ### Characters: Information
-* 🟡 Character name, species and concept can be upgraded
+* 🟢 Character name, species and concept can be upgraded
 * 🔴 Character description
 * 🔴 Character Background (simple)
 * 🔴 Access XP Log

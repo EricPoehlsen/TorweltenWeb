@@ -2,7 +2,7 @@
     include "config.php";
     $dsn = "mysql:dbname=$db_name;host=$db_serv";
     $db = new PDO($dsn, $db_user, $db_pass);
-    $admin = $db->query("SELECT username FROM users WHERE access = 99");
+    $admin = $db->query("SELECT `username` FROM `users` WHERE `access` = 99");
     if ($admin->rowCount() > 0) {
         ?>
         <h1>Installation abgeschlossen ...</h1>

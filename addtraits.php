@@ -17,7 +17,7 @@ include "_checklogin.php";
     //get data
     if (isset($_GET["id"])) {
         $id = intval($_GET["id"]);
-        $sql = "SELECT charname, charid FROM characters WHERE charid = ?";
+        $sql = "SELECT `charname`, `charid` FROM `characters` WHERE `charid` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $data = $stmt->fetchAll();

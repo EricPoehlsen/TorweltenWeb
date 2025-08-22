@@ -10,10 +10,10 @@
     if(array_key_exists("user", $_POST)) {
         //check if passwords match
         if ($_POST["pass"] == $_POST["pchk"]) {
-            $user = $_POST['user'];
+            $user = htmlspecialchars($_POST['user']);
             $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-            $mail = $_POST['mail'];
-            $sql = "INSERT INTO users (username, passhash, mail, access) VALUES (?, ?, ?, 99)";
+            $mail = htmlspecialchars($_POST['mail']);
+            $sql = "INSERT INTO `users` (`username`, `passhash`, `mail`, `access`) VALUES (?, ?, ?, 99)";
             $insert = $db->prepare($sql);
             $insert->execute([$user, $pass, $mail]);
         } else {
@@ -24,7 +24,7 @@
     } 
 
     //display form only if owner does not yet exist. 
-    $admin = $db->query("SELECT username FROM users WHERE access = 99");
+    $admin = $db->query("SELECT `username` FROM `users` WHERE `access` = 99");
     if ($admin->rowCount() == 0) {
         ?>
         <form method="POST">

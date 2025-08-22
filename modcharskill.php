@@ -17,8 +17,8 @@ if (isset($_POST["charid"])) {
     $edit = false;
     $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
     $stmt = $db->prepare($sql);
-    $data = $stmt->execute([$charid]);
-    $c = $data->fetch();
+    $stmt->execute([$charid]);
+    $c = $stmt->fetch();
     $editors = explode(",", $c["editors"]);
     $owner = $c["userid"];
     if (in_array($_SESSION["userid"], $editors)) $edit = true;

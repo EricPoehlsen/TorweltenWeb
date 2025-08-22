@@ -23,6 +23,7 @@ include "_checklogin.php";
         if (in_array($_SESSION["userid"], $editors)) $edit = true;
         if ($_SESSION["userid"] == $owner) $edit = true;
 
+        // update information
         if ($edit) {
             $info = $_POST['info'];
             $content = htmlspecialchars($_POST['content']);
@@ -33,13 +34,5 @@ include "_checklogin.php";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$content]);
             }
-
-
-
-
-
-
-
-            echo "... updating ...";
         }
     }

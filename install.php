@@ -20,7 +20,7 @@
                     $tables = $db->query("SHOW TABLES LIKE 'users'");
                     if ($tables->rowCount() == 1) { // the users table exists
                         $install_step = 2;
-                        $admin = $db->query("SELECT username FROM users WHERE access = 99"); //admin user exists
+                        $admin = $db->query("SELECT `username` FROM `users` WHERE `access` = 99"); //admin user exists
                         if ($admin->rowCount()>0) $install_step = 3;
                     }
                 } catch (Exception $e) {

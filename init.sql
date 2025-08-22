@@ -4,59 +4,64 @@ DROP TABLE IF EXISTS characters;
 DROP TABLE IF EXISTS xplog;
 DROP TABLE IF EXISTS skills;
 
-CREATE TABLE users (
-    userid int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    username varchar(255) UNIQUE NOT NULL,
-    passhash varchar(255) NOT NULL,
-    mail varchar(255) NOT NULL,
-    access INT NOT NULL
+CREATE TABLE `users` (
+    `userid` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `username` varchar(255) UNIQUE NOT NULL,
+    `passhash` varchar(255) NOT NULL,
+    `mail` varchar(255) NOT NULL,
+    `access` INT NOT NULL
 );
 
-CREATE TABLE logins (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    userid int NOT NULL,
-    token varchar(255) NOT NULL,
-    expires TIMESTAMP
+CREATE TABLE `logins` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int NOT NULL,
+    `token` varchar(255) NOT NULL,
+    `expires` TIMESTAMP
 );
 
-CREATE TABLE characters (
-    charid int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    userid int NOT NULL,
-    charname varchar(255),
-    species varchar(255),
-    concept varchar(255),
-    phy tinyint DEFAULT 4,
-    men tinyint DEFAULT 4,
-    soz tinyint DEFAULT 4,
-    nk tinyint DEFAULT 4,
-    fk tinyint DEFAULT 4,
-    lp tinyint DEFAULT 4,
-    ep tinyint DEFAULT 4,
-    mp tinyint DEFAULT 4,
-    cur_lp decimal(3,1) DEFAULT 0.0,
-    cur_ep decimal(3,1) DEFAULT 0.0,
-    cur_mp decimal(3,1) DEFAULT 0.0,
-    public boolean NOT NULL DEFAULT 0,
-    editors varchar(255) DEFAULT ""
+CREATE TABLE `characters` (
+    `charid` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int NOT NULL,
+    `charname` varchar(255),
+    `species` varchar(255),
+    `concept` varchar(255),
+    `phy` tinyint DEFAULT 4,
+    `men` tinyint DEFAULT 4,
+    `soz` tinyint DEFAULT 4,
+    `nk` tinyint DEFAULT 4,
+    `fk` tinyint DEFAULT 4,
+    `lp` tinyint DEFAULT 4,
+    `ep` tinyint DEFAULT 4,
+    `mp` tinyint DEFAULT 4,
+    `cur_lp` decimal(3,1) DEFAULT 0.0,
+    `cur_ep` decimal(3,1) DEFAULT 0.0,
+    `cur_mp` decimal(3,1) DEFAULT 0.0,
+    `public` boolean NOT NULL DEFAULT 0,
+    `editors` varchar(255) DEFAULT ""
 );
 
-CREATE TABLE xplog (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    charid int NOT NULL,
-    userid int NOT NULL,
-    xp int NOT NULL,
-    reason varchar(255),
-    changed DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE `charinfo` (
+    `charid` int NOT NULL PRIMARY KEY,
+    
 );
 
-CREATE TABLE skills (
-    id int NOT NULL PRIMARY KEY,
-    skill VARCHAR(255) NOT NULL,
-    stype CHAR(1) NOT NULL,
-    base BOOLEAN
+CREATE TABLE `xplog` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `charid` int NOT NULL,
+    `userid` int NOT NULL,
+    `xp` int NOT NULL,
+    `reason` varchar(255),
+    `changed` DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO skills (id, skill, stype, base) VALUES
+CREATE TABLE `skills` (
+    `id` int NOT NULL PRIMARY KEY,
+    `skill` VARCHAR(255) NOT NULL,
+    `stype` CHAR(1) NOT NULL,
+    `base` BOOLEAN
+);
+
+INSERT INTO `skills` (`id`, `skill`, `stype`, `base`) VALUES
 (1000000, 'Athletik', 'A', 1),
 (1001000, 'Klettern', 'A', 0),
 (1001001, 'Hochgebirgsklettern', 'P', 0),
@@ -851,25 +856,25 @@ INSERT INTO skills (id, skill, stype, base) VALUES
 (40017001, 'Řhu', 'S', 0),
 (40018001, 'Orionischer Standard', 'S', 0);
 
-CREATE TABLE charskills (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    charid int NOT NULL,
-    skillid int NOT NULL,
-    stype char(1) NOT NULL,
-    lvl INT NOT NULL DEFAULT 0
+CREATE TABLE `charskills` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `charid` int NOT NULL,
+    `skillid` int NOT NULL,
+    `stype` char(1) NOT NULL,
+    `lvl` INT NOT NULL DEFAULT 0
 );
 
-CREATE TABLE traits (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    title varchar(255) NOT NULL,
-    tdesc text NOT NULL,
-    maxrank tinyint DEFAULT 1,
-    xpcost tinyint DEFAULT 0,
-    traittype varchar(255) NOT NULL
+CREATE TABLE `traits` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `title` varchar(255) NOT NULL,
+    `tdesc` text NOT NULL,
+    `maxrank` tinyint DEFAULT 1,
+    `xpcost` tinyint DEFAULT 0,
+    `traittype` varchar(255) NOT NULL
 );
 
-INSERT INTO traits 
-(title, tdesc, traittype, maxrank, xpcost)
+INSERT INTO `traits` 
+(`title`, `tdesc`, `traittype`, `maxrank`, `xpcost`)
 VALUES 
 ('Schwach', 'Die Muskulatur des Charakters ist eher unterdurchschnittlich ausgeprägt, PHY-Proben, bei denen es um Stärke geht, werden um einen Punkt pro Rang in diesem Nachteil erschwert.', 'PHY Attributsspezialisierung', 10, -6),
 ('Kräftig', 'Der Charakter ist stärker, als es man annehmen würde. PHY-Proben, bei denen es auf die Stärke ankommt, werden um einen Punkt pro Rang in diesem Vorteil erleichtert. ', 'PHY Attributsspezialisierung', 10, 6),
@@ -921,13 +926,13 @@ VALUES
 ('Verminderter Tastsinn', 'Der Charakter hat ein deutlich weniger ausgeprägtes Tastgefühl, als die meisten Menschen. Er weiß zwar, wenn sich seine Hände um einen Gegenstand schließen, kann aber höchstens durch Sicht abschätzen, wie fest er jetzt zudrückt. Proben bei denen es auf Fingerfertigkeit ankommt, werden um einen Punkt pro Rang erschwert. Das können auch Proben sein, bei denen es ganz allgemein auf einen festen uns sicheren Griff ankommen, wie etwa Klettern.', '', 3, -3),
 ('Ausgeprägter Tastsinn', 'Durch diesen Vorteil ist der Charakter in der Lage, deutlich feinere Strukturen zu ertasten, als ein Mensch das könnte. Der Charakter erkennt feinste Unebenheiten oder Risse in Oberflächen. Entsprechende Proben werden um einen Punkt pro Rang erleichtert. Ab Rang zwei, kann ein Charakter einen gedruckten Text durch Tasten lesen, wenn er die entsprechende Übung hat (was sich in einer entsprechenden Wissensfertigkeit ausdrücken sollte).', '', 3, 3);
 
-CREATE TABLE chartraits (
-    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    charid int NOT NULL,
-    title varchar(255) NOT NULL,
-    tdesc text NOT NULL,
-    currank tinyint DEFAULT 1,
-    maxrank tinyint DEFAULT 1,
-    xpcost tinyint DEFAULT 0,
-    traittype varchar(255) NOT NULL
+CREATE TABLE `chartraits` (
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `charid` int NOT NULL,
+    `title` varchar(255) NOT NULL,
+    `tdesc` text NOT NULL,
+    `currank` tinyint DEFAULT 1,
+    `maxrank` tinyint DEFAULT 1,
+    `xpcost` tinyint DEFAULT 0,
+    `traittype` varchar(255) NOT NULL
 );

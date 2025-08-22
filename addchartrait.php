@@ -21,7 +21,7 @@ include "_checklogin.php";
         // missing access fails silently because the user should not have access to the page
         // this is a double check on the server side of things ...
         $edit = false;
-        $sql = "SELECT userid, editors FROM characters WHERE charid = ?";
+        $sql = "SELECT `userid`, `editors` FROM `characters` WHERE `charid` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$charid]);
         $c = $stmt->fetch();
@@ -34,21 +34,21 @@ include "_checklogin.php";
 
             // get trait
             $traitid = intval($_POST["traitid"]);
-            $sql = "SELECT * FROM traits WHERE id = ?";
+            $sql = "SELECT * FROM `traits` WHERE `id` = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$traitid]);
             $data = $stmt->fetchAll();
 
             // insert trait into char traits ...
             $trait = $data[0];
-            $sql = "INSERT INTO chartraits (charid, title, tdesc, maxrank, xpcost, traittype) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO `chartraits` (`charid`, `title`, `tdesc`, `maxrank`, `xpcost`, `traittype`) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$charid, $trait["title"], $trait["tdesc"], $trait["maxrank"], $trait["xpcost"], $trait["traittype"]]);
             
             // log xp
             $userid = $_SESSION["userid"];
             $reason = "Eigenschaft {$trait['title']} hinzugefügt";
-            $sql = "INSERT INTO xplog (charid, userid, xp, reason) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO `xplog` (`charid`, `userid`, `xp`, `reason`) VALUES (?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$charid, $userid, $trait["xpcost"], $reason]);
         }

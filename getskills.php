@@ -12,7 +12,7 @@ $db = new PDO($dsn, $db_user, $db_pass);
 if (isset($_POST["charid"])) {
     // character data
     $id = intval($_POST["charid"]);
-    $sql = "SELECT * FROM characters WHERE charid = ?";
+    $sql = "SELECT * FROM `characters` WHERE `charid` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$id]);
     $c = $stmt->fetch();
@@ -21,19 +21,19 @@ if (isset($_POST["charid"])) {
     $skills = [];
     // all skills
     if ($_POST["input"] == "") {
-        $sql = "SELECT * FROM skills ORDER BY id";
+        $sql = "SELECT * FROM `skills` ORDER BY `id`";
         $stmt = $db->query($sql);
         $skills = $stmt->fetchAll();
     } else { // filtered by search
         $input = "%{$_POST["input"]}%";
-        $sql = "SELECT * FROM skills WHERE skill LIKE ? ORDER BY id";
+        $sql = "SELECT * FROM `skills` WHERE `skill` LIKE ? ORDER BY `id`";
         $stmt = $db->prepare($sql);
         $stmt->execute([$input]);
         $skills = $stmt->fetchAll();
     }
     
     // get character skills
-    $sql = "SELECT * FROM charskills WHERE charid = ?";
+    $sql = "SELECT * FROM `charskills` WHERE `charid` = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$_POST["charid"]]);
     $charskills = $stmt->fetchAll();

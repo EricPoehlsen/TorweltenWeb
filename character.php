@@ -36,28 +36,28 @@ include "_checklogin.php";
     if (isset($_GET["id"])) {
         // basic data
         $id = intval($_GET["id"]);
-        $sql = "SELECT * FROM characters WHERE charid = ?";
+        $sql = "SELECT * FROM `characters` WHERE `charid` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $c = $stmt->fetch();
         
         //skills
         $sql = "SELECT 
-                    skills.id AS id,
-                    charskills.lvl AS lvl, 
-                    skills.stype AS stype, 
-                    skills.skill AS skill
-                FROM charskills
-                INNER JOIN skills
-                ON skills.id = charskills.skillid
-                WHERE charskills.charid = ?
-                ORDER BY skills.id";
+                    `skills`.`id` AS `id`,
+                    `charskills`.`lvl` AS `lvl`, 
+                    `skills`.`stype` AS `stype`, 
+                    `skills`.`skill` AS `skill`
+                FROM `charskills`
+                INNER JOIN `skills`
+                ON `skills`.`id` = `charskills`.`skillid`
+                WHERE `charskills`.`charid` = ?
+                ORDER BY `skills`.`id`";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $skills = $stmt->fetchAll();
 
         //traits
-        $sql = "SELECT * FROM chartraits WHERE charid = ?";
+        $sql = "SELECT * FROM `chartraits` WHERE `charid` = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
         $traits = $stmt->fetchAll();

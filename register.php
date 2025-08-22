@@ -20,10 +20,10 @@
             $stmt = $db->prepare($sql);
             $stmt->execute([$_POST["user"]]);
             if ($stmt->rowCount() == 0) { // username is unique, create user
-                $user = $_POST['user'];
+                $user = htmlspecialchars($_POST['user']);
                 $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-                $mail = $_POST['mail'];
-                $sql = "INSERT INTO users (username, passhash, mail, access) VALUES (?, ?, ?, 1)";
+                $mail = htmlspecialchars($_POST['mail']);
+                $sql = "INSERT INTO users (`username`, `passhash`, `mail`, `access`) VALUES (?, ?, ?, 1)";
                 $insert = $db->prepare($sql);
                 $insert->execute([$user, $pass, $mail]);
                 $user_created = true;
