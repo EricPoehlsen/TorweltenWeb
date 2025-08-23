@@ -20,17 +20,25 @@ function getSkills(charid) {
                 skillline = document.createElement("div");
                 skillline.className = "skillline";
 
-                //create container for button
-                button = document.createElement("button");
-                button.className = "skill";
-                button.setAttribute("id", key);
-                if (result[key]["lvl"] > 0) {
-                    button.innerHTML = result[key]["lvl"]; 
-                } else {
-                    button.innerHTML = "+"; 
-                    button.setAttribute("onClick", "changeSkill(event, "+key+", "+charid+")");
-                }
-                skillline.appendChild(button);
+                //lower button
+                button_lower = document.createElement("button");
+                // button_lower.className = "skill";
+                button_lower.innerHTML = "◀"; 
+                button_lower.setAttribute("onClick", "changeSkill("+key+", "+charid+", \"dec\")");
+                skillline.appendChild(button_lower);
+                //input field
+                skill_input = document.createElement("input");
+                skill_input.setAttribute("id", key);
+                skill_input.className = "skill";
+                skill_input.value = result[key]["lvl"];
+                skillline.appendChild(skill_input);
+
+                //raise button
+                button_raise = document.createElement("button");
+                // button_raise.className = "skill";
+                button_raise.innerHTML = "▶"; 
+                button_raise.setAttribute("onClick", "changeSkill("+key+", "+charid+", \"inc\")");
+                skillline.appendChild(button_raise);
 
                 //create container for name
                 skillname = document.createElement("div");
@@ -51,24 +59,7 @@ function getSkills(charid) {
 }
 
 // add a character skill
-function changeSkill(event, skillid, charid) {
-    // get Position of the click:
-    clickpos = event.screenX;
-    button = document.getElementById(skillid);
-    box = button.getBoundingClientRect();
-    midpoint = box.left + (box.width/2);
-    
-    // increase if button clicked right - decrease if clicked left
-    action = ""
-    if (button.innerHTML == "+") {
-        action = "inc";
-    } else {
-        if (clickpos < midpoint) {
-            action = "dec";
-        } else {
-            action = "inc";
-        }
-    }
+function changeSkill(skillid, charid, action) {
 
     xhr = new XMLHttpRequest();
     xhr.open("POST", "modcharskill.php");
@@ -78,12 +69,8 @@ function changeSkill(event, skillid, charid) {
     //handle answer from server
     xhr.onreadystatechange=function() {
         if (xhr.readyState==4 && xhr.status==200) {
-            button = document.getElementById(skillid);
-            if (xhr.responseText > 0) {
-                button.innerHTML = xhr.responseText;
-            } else {
-                button.innerHTML = "+";
-            } 
+            input = document.getElementById(skillid);
+            input.value = xhr.responseText
         }
     }
     

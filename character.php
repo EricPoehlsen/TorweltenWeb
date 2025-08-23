@@ -109,7 +109,15 @@ include "_checklogin.php";
     echo "<div class=\"skillbox\">";
 
     foreach ($skills as $skill) {
-        echo "<div class='skill'>{$skill['skill']} - {$skill['lvl']}</div>";
+
+        $lvl = "▣□□□";
+        if ($skill['lvl'] == 2) $lvl = "▣▣□□";
+        if ($skill['lvl'] == 3) $lvl = "▣▣▣□";
+        if ($skill['lvl'] == 4) $lvl = "▣▣▣▣";
+
+
+
+        echo "<div class='container'><div class='skill'>$lvl {$skill['skill']}</div></div>";
     }
     
     echo "</div>";

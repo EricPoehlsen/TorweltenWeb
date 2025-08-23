@@ -85,16 +85,17 @@ label.attr {
 .skillline {
     display: flex;
     flex-direction: row;
-}
-
-.skill {
     background: var(--grey);
     padding: 10px;
     margin: 5px;
 }
 
-button.skill {
-    width: 5em;
+input.skill {
+    width: 2em;
+}
+
+div.skill {
+    margin: auto auto auto 1em;
 }
 
 .userbar {

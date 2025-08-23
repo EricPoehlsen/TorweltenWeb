@@ -68,13 +68,12 @@ The core framework to display a page
 * 🔴 Display XP on character
 ### Characters: Attributes
 * 🔴 Current attribute stats for lp, ep, mp
-* 🔴 Current attribute stats for lp, ep, mp
 * 🔴 damage and healing
 ### Characters: Skills
 * 🔴 Users can create skills
 * 🔴 Add Psionik skills
 ### Characters: Traits
-* 🔴 Implement more complex traits
+* 🔴 Implement additional traits
 ### Characters: Equipment
 * 🔴 Implement basic equipment
 * 🔴 Implement money
